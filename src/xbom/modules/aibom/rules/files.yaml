@@ -1,0 +1,78 @@
+# File scanning configuration — skip dirs, source extensions, config names, model file types
+
+skip_dirs:
+  - .git
+  - node_modules
+  - __pycache__
+  - .venv
+  - venv
+  - .env
+  - vendor
+  - target
+  - build
+  - dist
+  - .tox
+  - .mypy_cache
+  - .pytest_cache
+  - .ruff_cache
+  - site-packages
+  - .next
+
+source_extensions:
+  - .py
+  - .pyi
+  - .js
+  - .mjs
+  - .cjs
+  - .jsx
+  - .ts
+  - .mts
+  - .cts
+  - .tsx
+  - .java
+  - .kt
+  - .scala
+  - .go
+  - .rs
+  - .rb
+  - .cs
+
+config_names:
+  - docker-compose.yml
+  - docker-compose.yaml
+  - compose.yml
+  - compose.yaml
+  - .env
+  - .env.local
+  - .env.development
+  - .env.production
+  - mcp.json
+  - .mcp.json
+  - mcp-config.json
+
+# Model file extensions: ext -> [name_tag, description]
+model_file_extensions:
+  .gguf: [gguf-model, "GGUF quantized model file (llama.cpp)"]
+  .safetensors: [safetensors-model, "SafeTensors model file"]
+  .onnx: [onnx-model, "ONNX model file"]
+  .pt: [pytorch-model, "PyTorch model checkpoint"]
+  .pth: [pytorch-model, "PyTorch model checkpoint"]
+  .h5: [keras-model, "Keras/HDF5 model file"]
+  .joblib: [joblib-model, "Joblib serialized ML model"]
+  .mlmodel: [coreml-model, "Apple Core ML model file"]
+  .tflite: [tflite-model, "TensorFlow Lite model file"]
+  .pb: [protobuf-model, "TensorFlow/Protobuf model file"]
+
+# Regex pattern for .bin files that look like ML model weights
+model_bin_pattern: "(?:model|pytorch_model|tf_model|weights|adapter_model|consolidated|ggml-model|tokenizer)\\S*\\.bin$"
+
+# File extensions to scan for network endpoints
+network_file_extensions:
+  - .env
+  - .yaml
+  - .yml
+  - .json
+  - .toml
+  - .ini
+  - .cfg
+  - .conf

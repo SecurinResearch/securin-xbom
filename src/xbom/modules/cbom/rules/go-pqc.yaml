@@ -1,0 +1,141 @@
+rules:
+  # =========================================================
+  # Quantum-Vulnerable Algorithm Detection — Go
+  # =========================================================
+
+  - id: xbom-go-pqc-vulnerable-rsa-keygen
+    pattern: rsa.GenerateKey(...)
+    message: >
+      RSA key generation detected. RSA is completely broken by Shor's algorithm
+      regardless of key size. Migrate to crypto/mlkem (Go 1.24+) or CIRCL.
+    severity: WARNING
+    languages: [go]
+    metadata:
+      category: security
+      subcategory: post-quantum
+      xbom:
+        asset_type: algorithm
+        name: RSA
+        primitive: pk
+        weakness: quantum_vulnerable
+
+  - id: xbom-go-pqc-vulnerable-ecdsa-keygen
+    pattern: ecdsa.GenerateKey(...)
+    message: >
+      ECDSA key generation detected. ECDSA is broken by Shor's algorithm.
+      Migrate to ML-DSA via CIRCL or a PQC library.
+    severity: WARNING
+    languages: [go]
+    metadata:
+      category: security
+      subcategory: post-quantum
+      xbom:
+        asset_type: algorithm
+        name: ECDSA
+        primitive: pk
+        weakness: quantum_vulnerable
+
+  - id: xbom-go-pqc-vulnerable-ecdh
+    pattern-either:
+      - pattern: ecdh.P256()
+      - pattern: ecdh.P384()
+      - pattern: ecdh.P521()
+      - pattern: ecdh.X25519()
+    message: >
+      ECDH key exchange detected. ECDH is broken by Shor's algorithm.
+      Migrate to ML-KEM via crypto/mlkem (Go 1.24+) or CIRCL.
+    severity: WARNING
+    languages: [go]
+    metadata:
+      category: security
+      subcategory: post-quantum
+      xbom:
+        asset_type: algorithm
+        name: ECDH
+        primitive: pk
+        weakness: quantum_vulnerable
+
+  - id: xbom-go-pqc-vulnerable-ed25519
+    pattern: ed25519.GenerateKey(...)
+    message: >
+      Ed25519 key generation detected. Ed25519 is broken by Shor's algorithm.
+      Migrate to ML-DSA via CIRCL.
+    severity: WARNING
+    languages: [go]
+    metadata:
+      category: security
+      subcategory: post-quantum
+      xbom:
+        asset_type: algorithm
+        name: Ed25519
+        primitive: dsa
+        weakness: quantum_vulnerable
+
+  - id: xbom-go-pqc-vulnerable-dsa
+    pattern-either:
+      - pattern: dsa.GenerateParameters(...)
+      - pattern: dsa.GenerateKey(...)
+    message: >
+      DSA key generation detected. DSA is broken by Shor's algorithm.
+    severity: WARNING
+    languages: [go]
+    metadata:
+      category: security
+      subcategory: post-quantum
+      xbom:
+        asset_type: algorithm
+        name: DSA
+        primitive: dsa
+        weakness: quantum_vulnerable
+
+  # =========================================================
+  # PQC Library Detection (Positive Signal)
+  # =========================================================
+
+  - id: xbom-go-pqc-library-mlkem
+    pattern-regex: '"crypto/mlkem"'
+    message: >
+      Go stdlib ML-KEM (Go 1.24+) detected — PQC migration in progress.
+    severity: INFO
+    languages: [go]
+    metadata:
+      category: security
+      subcategory: post-quantum
+      xbom:
+        asset_type: algorithm
+        name: ML-KEM
+        primitive: kem
+        weakness: ""
+        pqc_status: migration_in_progress
+
+  - id: xbom-go-pqc-library-circl
+    pattern-regex: '"github\.com/cloudflare/circl'
+    message: >
+      Cloudflare CIRCL PQC library detected — PQC migration in progress.
+    severity: INFO
+    languages: [go]
+    metadata:
+      category: security
+      subcategory: post-quantum
+      xbom:
+        asset_type: algorithm
+        name: ML-KEM
+        primitive: kem
+        weakness: ""
+        pqc_status: migration_in_progress
+
+  - id: xbom-go-pqc-library-oqs
+    pattern-regex: '"github\.com/open-quantum-safe/liboqs-go'
+    message: >
+      liboqs-go PQC library detected — PQC migration in progress.
+    severity: INFO
+    languages: [go]
+    metadata:
+      category: security
+      subcategory: post-quantum
+      xbom:
+        asset_type: algorithm
+        name: ML-KEM
+        primitive: kem
+        weakness: ""
+        pqc_status: migration_in_progress

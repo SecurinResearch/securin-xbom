@@ -1,0 +1,137 @@
+rules:
+  # =========================================================
+  # Quantum-Vulnerable Algorithm Detection — JavaScript/TypeScript
+  # =========================================================
+
+  - id: xbom-js-pqc-vulnerable-rsa-keygen
+    pattern-either:
+      - pattern: crypto.generateKeyPairSync('rsa', ...)
+      - pattern: crypto.generateKeyPair('rsa', ...)
+    message: >
+      RSA key generation detected. RSA is completely broken by Shor's algorithm.
+      Migrate to post-quantum alternatives.
+    severity: WARNING
+    languages: [javascript, typescript]
+    metadata:
+      category: security
+      subcategory: post-quantum
+      xbom:
+        asset_type: algorithm
+        name: RSA
+        primitive: pk
+        weakness: quantum_vulnerable
+
+  - id: xbom-js-pqc-vulnerable-ec-keygen
+    pattern-either:
+      - pattern: crypto.generateKeyPairSync('ec', ...)
+      - pattern: crypto.generateKeyPair('ec', ...)
+    message: >
+      Elliptic curve key generation detected. All ECC is broken by Shor's algorithm.
+    severity: WARNING
+    languages: [javascript, typescript]
+    metadata:
+      category: security
+      subcategory: post-quantum
+      xbom:
+        asset_type: algorithm
+        name: ECDSA
+        primitive: pk
+        weakness: quantum_vulnerable
+
+  - id: xbom-js-pqc-vulnerable-dh
+    pattern-either:
+      - pattern: crypto.createDiffieHellman(...)
+      - pattern: crypto.createDiffieHellmanGroup(...)
+      - pattern: crypto.createECDH(...)
+    message: >
+      Diffie-Hellman/ECDH key exchange detected. DH is broken by Shor's algorithm.
+      Migrate to ML-KEM (FIPS 203).
+    severity: WARNING
+    languages: [javascript, typescript]
+    metadata:
+      category: security
+      subcategory: post-quantum
+      xbom:
+        asset_type: algorithm
+        name: DH
+        primitive: pk
+        weakness: quantum_vulnerable
+
+  - id: xbom-js-pqc-vulnerable-dsa-keygen
+    pattern-either:
+      - pattern: crypto.generateKeyPairSync('dsa', ...)
+      - pattern: crypto.generateKeyPair('dsa', ...)
+    message: >
+      DSA key generation detected. DSA is broken by Shor's algorithm.
+    severity: WARNING
+    languages: [javascript, typescript]
+    metadata:
+      category: security
+      subcategory: post-quantum
+      xbom:
+        asset_type: algorithm
+        name: DSA
+        primitive: dsa
+        weakness: quantum_vulnerable
+
+  - id: xbom-js-pqc-vulnerable-webcrypto-rsa
+    pattern-either:
+      - pattern: |
+          crypto.subtle.generateKey({name: "RSASSA-PKCS1-v1_5", ...}, ...)
+      - pattern: |
+          crypto.subtle.generateKey({name: "RSA-PSS", ...}, ...)
+      - pattern: |
+          crypto.subtle.generateKey({name: "RSA-OAEP", ...}, ...)
+    message: >
+      WebCrypto RSA key generation detected. RSA is broken by Shor's algorithm.
+    severity: WARNING
+    languages: [javascript, typescript]
+    metadata:
+      category: security
+      subcategory: post-quantum
+      xbom:
+        asset_type: algorithm
+        name: RSA
+        primitive: pk
+        weakness: quantum_vulnerable
+
+  - id: xbom-js-pqc-vulnerable-webcrypto-ec
+    pattern-either:
+      - pattern: |
+          crypto.subtle.generateKey({name: "ECDSA", ...}, ...)
+      - pattern: |
+          crypto.subtle.generateKey({name: "ECDH", ...}, ...)
+    message: >
+      WebCrypto ECC key generation detected. ECC is broken by Shor's algorithm.
+    severity: WARNING
+    languages: [javascript, typescript]
+    metadata:
+      category: security
+      subcategory: post-quantum
+      xbom:
+        asset_type: algorithm
+        name: ECDSA
+        primitive: pk
+        weakness: quantum_vulnerable
+
+  # =========================================================
+  # PQC Library Detection (Positive Signal)
+  # =========================================================
+
+  - id: xbom-js-pqc-library-oqs
+    pattern-either:
+      - pattern: require('liboqs-node')
+      - pattern: require("liboqs-node")
+    message: >
+      liboqs-node PQC library detected — PQC migration in progress.
+    severity: INFO
+    languages: [javascript, typescript]
+    metadata:
+      category: security
+      subcategory: post-quantum
+      xbom:
+        asset_type: algorithm
+        name: ML-KEM
+        primitive: kem
+        weakness: ""
+        pqc_status: migration_in_progress

@@ -1,0 +1,39 @@
+# API-BOM risk scoring weights and severity thresholds
+
+weights:
+  no_authentication: 30
+  sensitive_data_exposure: 25
+  external_api_no_tls: 25
+  undocumented_endpoint: 20
+  admin_endpoint_exposed: 20
+  deprecated_api_version: 15
+  wildcard_cors: 15
+  no_rate_limit: 10
+
+severity_thresholds:
+  critical: 76
+  high: 51
+  medium: 26
+  low: 1
+
+# Path patterns indicating sensitive data handling
+sensitive_path_keywords:
+  - password
+  - passwd
+  - secret
+  - credential
+  - token
+  - ssn
+  - credit_card
+  - credit-card
+
+# Path patterns indicating admin/debug endpoints
+admin_path_keywords:
+  - admin
+  - debug
+  - internal
+  - _internal
+  - metrics
+  - actuator
+  - management
+  - devtools

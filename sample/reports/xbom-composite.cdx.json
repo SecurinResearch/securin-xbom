@@ -1,0 +1,576 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:2e0986cb-eaf9-472e-9ff5-853dbdb2a95a",
+  "version": 1,
+  "metadata": {
+    "tools": {
+      "components": [
+        {
+          "type": "application",
+          "name": "xbom",
+          "version": "0.1.0",
+          "description": "Unified xBOM generator"
+        }
+      ]
+    },
+    "component": {
+      "type": "application",
+      "name": "sample",
+      "properties": [
+        {
+          "name": "xbom:source:provider",
+          "value": "local"
+        }
+      ]
+    }
+  },
+  "components": [
+    {
+      "type": "cryptographic-asset",
+      "name": "AES-128",
+      "description": "Fernet (AES-128-CBC) symmetric encryption",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "ae",
+          "parameterSetIdentifier": "128",
+          "nistQuantumSecurityLevel": 1
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "app/auth.py",
+            "line": 17
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "xbom:crypto:detected",
+          "value": "true"
+        },
+        {
+          "name": "xbom:crypto:scanner",
+          "value": "semgrep"
+        },
+        {
+          "name": "xbom:crypto:rule_id",
+          "value": "Users.aviral.Work.xbom.src.xbom.modules.cbom.rules.xbom-python-fernet"
+        },
+        {
+          "name": "xbom:crypto:source_file",
+          "value": "app/auth.py"
+        },
+        {
+          "name": "xbom:crypto:source_line",
+          "value": "17"
+        },
+        {
+          "name": "xbom:crypto:severity",
+          "value": "low"
+        },
+        {
+          "name": "xbom:crypto:evidence",
+          "value": "requires login"
+        },
+        {
+          "name": "xbom:crypto:quantum_safe",
+          "value": "false"
+        },
+        {
+          "name": "xbom:crypto:quantum_status",
+          "value": "weakened"
+        },
+        {
+          "name": "xbom:crypto:quantum_reason",
+          "value": "64-bit effective security under Grover's \u2014 insufficient for long-term"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "name": "AES-128",
+      "description": "Fernet (AES-128-CBC) symmetric encryption",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "ae",
+          "parameterSetIdentifier": "128",
+          "nistQuantumSecurityLevel": 1
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "app/auth.py",
+            "line": 20
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "xbom:crypto:detected",
+          "value": "true"
+        },
+        {
+          "name": "xbom:crypto:scanner",
+          "value": "semgrep"
+        },
+        {
+          "name": "xbom:crypto:rule_id",
+          "value": "Users.aviral.Work.xbom.src.xbom.modules.cbom.rules.xbom-python-fernet"
+        },
+        {
+          "name": "xbom:crypto:source_file",
+          "value": "app/auth.py"
+        },
+        {
+          "name": "xbom:crypto:source_line",
+          "value": "20"
+        },
+        {
+          "name": "xbom:crypto:severity",
+          "value": "low"
+        },
+        {
+          "name": "xbom:crypto:evidence",
+          "value": "requires login"
+        },
+        {
+          "name": "xbom:crypto:quantum_safe",
+          "value": "false"
+        },
+        {
+          "name": "xbom:crypto:quantum_status",
+          "value": "weakened"
+        },
+        {
+          "name": "xbom:crypto:quantum_reason",
+          "value": "64-bit effective security under Grover's \u2014 insufficient for long-term"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "name": "bcrypt",
+      "description": "bcrypt password hashing",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "kdf"
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "app/auth.py",
+            "line": 25
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "xbom:crypto:detected",
+          "value": "true"
+        },
+        {
+          "name": "xbom:crypto:scanner",
+          "value": "semgrep"
+        },
+        {
+          "name": "xbom:crypto:rule_id",
+          "value": "Users.aviral.Work.xbom.src.xbom.modules.cbom.rules.xbom-python-bcrypt"
+        },
+        {
+          "name": "xbom:crypto:source_file",
+          "value": "app/auth.py"
+        },
+        {
+          "name": "xbom:crypto:source_line",
+          "value": "25"
+        },
+        {
+          "name": "xbom:crypto:severity",
+          "value": "low"
+        },
+        {
+          "name": "xbom:crypto:evidence",
+          "value": "requires login"
+        },
+        {
+          "name": "xbom:crypto:quantum_safe",
+          "value": "unknown"
+        },
+        {
+          "name": "xbom:crypto:quantum_status",
+          "value": "unknown"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "name": "bcrypt",
+      "description": "bcrypt password hashing",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "kdf"
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "app/auth.py",
+            "line": 30
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "xbom:crypto:detected",
+          "value": "true"
+        },
+        {
+          "name": "xbom:crypto:scanner",
+          "value": "semgrep"
+        },
+        {
+          "name": "xbom:crypto:rule_id",
+          "value": "Users.aviral.Work.xbom.src.xbom.modules.cbom.rules.xbom-python-bcrypt"
+        },
+        {
+          "name": "xbom:crypto:source_file",
+          "value": "app/auth.py"
+        },
+        {
+          "name": "xbom:crypto:source_line",
+          "value": "30"
+        },
+        {
+          "name": "xbom:crypto:severity",
+          "value": "low"
+        },
+        {
+          "name": "xbom:crypto:evidence",
+          "value": "requires login"
+        },
+        {
+          "name": "xbom:crypto:quantum_safe",
+          "value": "unknown"
+        },
+        {
+          "name": "xbom:crypto:quantum_status",
+          "value": "unknown"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "name": "HMAC",
+      "description": "JWT token signing/verification",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "mac",
+          "nistQuantumSecurityLevel": 3
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "app/auth.py",
+            "line": 36
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "xbom:crypto:detected",
+          "value": "true"
+        },
+        {
+          "name": "xbom:crypto:scanner",
+          "value": "semgrep"
+        },
+        {
+          "name": "xbom:crypto:rule_id",
+          "value": "Users.aviral.Work.xbom.src.xbom.modules.cbom.rules.xbom-python-jwt-encode"
+        },
+        {
+          "name": "xbom:crypto:source_file",
+          "value": "app/auth.py"
+        },
+        {
+          "name": "xbom:crypto:source_line",
+          "value": "36"
+        },
+        {
+          "name": "xbom:crypto:severity",
+          "value": "low"
+        },
+        {
+          "name": "xbom:crypto:evidence",
+          "value": "requires login"
+        },
+        {
+          "name": "xbom:crypto:quantum_safe",
+          "value": "true"
+        },
+        {
+          "name": "xbom:crypto:quantum_status",
+          "value": "safe"
+        },
+        {
+          "name": "xbom:crypto:quantum_reason",
+          "value": "Security follows underlying hash"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "name": "CSPRNG",
+      "description": "Cryptographically secure random generation",
+      "cryptoProperties": {
+        "assetType": "related-crypto-material",
+        "relatedCryptoMaterialProperties": {
+          "type": "csprng"
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "app/auth.py",
+            "line": 51
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "xbom:crypto:detected",
+          "value": "true"
+        },
+        {
+          "name": "xbom:crypto:scanner",
+          "value": "semgrep"
+        },
+        {
+          "name": "xbom:crypto:rule_id",
+          "value": "Users.aviral.Work.xbom.src.xbom.modules.cbom.rules.xbom-python-secrets"
+        },
+        {
+          "name": "xbom:crypto:source_file",
+          "value": "app/auth.py"
+        },
+        {
+          "name": "xbom:crypto:source_line",
+          "value": "51"
+        },
+        {
+          "name": "xbom:crypto:severity",
+          "value": "low"
+        },
+        {
+          "name": "xbom:crypto:evidence",
+          "value": "requires login"
+        },
+        {
+          "name": "xbom:crypto:quantum_safe",
+          "value": "unknown"
+        },
+        {
+          "name": "xbom:crypto:quantum_status",
+          "value": "unknown"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "name": "SHA-256",
+      "description": "SHA-256 hash usage",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "hash",
+          "parameterSetIdentifier": "256",
+          "nistQuantumSecurityLevel": 1
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "app/auth.py",
+            "line": 52
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "xbom:crypto:detected",
+          "value": "true"
+        },
+        {
+          "name": "xbom:crypto:scanner",
+          "value": "semgrep"
+        },
+        {
+          "name": "xbom:crypto:rule_id",
+          "value": "Users.aviral.Work.xbom.src.xbom.modules.cbom.rules.xbom-python-hash-sha256"
+        },
+        {
+          "name": "xbom:crypto:source_file",
+          "value": "app/auth.py"
+        },
+        {
+          "name": "xbom:crypto:source_line",
+          "value": "52"
+        },
+        {
+          "name": "xbom:crypto:severity",
+          "value": "low"
+        },
+        {
+          "name": "xbom:crypto:evidence",
+          "value": "requires login"
+        },
+        {
+          "name": "xbom:crypto:quantum_safe",
+          "value": "true"
+        },
+        {
+          "name": "xbom:crypto:quantum_status",
+          "value": "safe"
+        },
+        {
+          "name": "xbom:crypto:quantum_reason",
+          "value": "128-bit preimage resistance under Grover's \u2014 adequate"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "name": "HMAC",
+      "description": "HMAC usage",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "mac",
+          "nistQuantumSecurityLevel": 3
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "app/auth.py",
+            "line": 57
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "xbom:crypto:detected",
+          "value": "true"
+        },
+        {
+          "name": "xbom:crypto:scanner",
+          "value": "semgrep"
+        },
+        {
+          "name": "xbom:crypto:rule_id",
+          "value": "Users.aviral.Work.xbom.src.xbom.modules.cbom.rules.xbom-python-hmac"
+        },
+        {
+          "name": "xbom:crypto:source_file",
+          "value": "app/auth.py"
+        },
+        {
+          "name": "xbom:crypto:source_line",
+          "value": "57"
+        },
+        {
+          "name": "xbom:crypto:severity",
+          "value": "low"
+        },
+        {
+          "name": "xbom:crypto:evidence",
+          "value": "requires login"
+        },
+        {
+          "name": "xbom:crypto:quantum_safe",
+          "value": "true"
+        },
+        {
+          "name": "xbom:crypto:quantum_status",
+          "value": "safe"
+        },
+        {
+          "name": "xbom:crypto:quantum_reason",
+          "value": "Security follows underlying hash"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "name": "HMAC",
+      "description": "JWT token signing/verification",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "mac",
+          "nistQuantumSecurityLevel": 3
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "app/auth.py",
+            "line": 64
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "xbom:crypto:detected",
+          "value": "true"
+        },
+        {
+          "name": "xbom:crypto:scanner",
+          "value": "semgrep"
+        },
+        {
+          "name": "xbom:crypto:rule_id",
+          "value": "Users.aviral.Work.xbom.src.xbom.modules.cbom.rules.xbom-python-jwt-encode"
+        },
+        {
+          "name": "xbom:crypto:source_file",
+          "value": "app/auth.py"
+        },
+        {
+          "name": "xbom:crypto:source_line",
+          "value": "64"
+        },
+        {
+          "name": "xbom:crypto:severity",
+          "value": "low"
+        },
+        {
+          "name": "xbom:crypto:evidence",
+          "value": "requires login"
+        },
+        {
+          "name": "xbom:crypto:quantum_safe",
+          "value": "true"
+        },
+        {
+          "name": "xbom:crypto:quantum_status",
+          "value": "safe"
+        },
+        {
+          "name": "xbom:crypto:quantum_reason",
+          "value": "Security follows underlying hash"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+# Docker and container AI detection patterns
+
+# Docker Compose AI service image patterns (for ConfigFileScanner)
+# [regex, name, description]
+compose_images:
+  - ['ollama/ollama', ollama, "Ollama Docker service"]
+  - ['vllm/vllm-openai', vllm, "vLLM Docker service"]
+  - ['chromadb/chroma', chromadb, "ChromaDB Docker service"]
+  - ['qdrant/qdrant', qdrant, "Qdrant Docker service"]
+  - ['weaviate/weaviate', weaviate, "Weaviate Docker service"]
+  - ['milvusdb/milvus', milvus, "Milvus Docker service"]
+  - ['ghcr\.io/huggingface/text-generation-inference', tgi, "HF Text Generation Inference Docker service"]
+  - ['nvcr\.io/nvidia/tritonserver', triton, "NVIDIA Triton Docker service"]
+  - ['langfuse/langfuse', langfuse, "Langfuse Docker service"]
+  - ['pgvector/pgvector', pgvector, "pgvector Docker service"]
+
+# Full Dockerfile/docker-compose AI image patterns (for DockerScanner)
+# [regex, name, description]
+images:
+  - ['ollama/ollama', ollama, "Ollama local LLM server"]
+  - ['pytorch/pytorch', pytorch, "PyTorch ML framework"]
+  - ['tensorflow/tensorflow', tensorflow, "TensorFlow ML framework"]
+  - ['nvcr\.io/nvidia/tritonserver', triton, "NVIDIA Triton inference server"]
+  - ['nvcr\.io/nvidia/tensorrt', tensorrt, "NVIDIA TensorRT"]
+  - ['nvcr\.io/nvidia/pytorch', nvidia-pytorch, "NVIDIA PyTorch container"]
+  - ['nvcr\.io/nvidia/tensorflow', nvidia-tensorflow, "NVIDIA TensorFlow container"]
+  - ['huggingface/', huggingface, "HuggingFace container"]
+  - ['ghcr\.io/huggingface/text-generation-inference', tgi, "HuggingFace TGI"]
+  - ['vllm/vllm', vllm, "vLLM inference server"]
+  - ['chromadb/chroma', chromadb, "ChromaDB vector store"]
+  - ['qdrant/qdrant', qdrant, "Qdrant vector store"]
+  - ['weaviate/', weaviate, "Weaviate vector store"]
+  - ['semitechnologies/weaviate', weaviate, "Weaviate vector store"]
+  - ['milvusdb/milvus', milvus, "Milvus vector store"]
+  - ['zilliz/', milvus, "Milvus/Zilliz vector store"]
+  - ['pinecone/', pinecone, "Pinecone vector store"]
+  - ['neo4j/', neo4j, "Neo4j graph database"]
+  - ['jupyter/', jupyter, "Jupyter notebook server"]
+  - ['mlflow/mlflow', mlflow, "MLflow experiment tracking"]
+  - ['ray/ray-ml', ray, "Ray distributed ML"]
+  - ['langfuse/langfuse', langfuse, "Langfuse LLM observability"]
+  - ['localai/localai', localai, "LocalAI inference server"]
+
+# AI-related environment variable prefixes (for DockerScanner env detection)
+env_patterns:
+  - OPENAI
+  - ANTHROPIC
+  - HUGGING
+  - HF_TOKEN
+  - COHERE
+  - MISTRAL
+  - OLLAMA
+  - BEDROCK
+  - AZURE_OPENAI
+  - GOOGLE_AI
+  - VERTEX
+  - REPLICATE
+  - TOGETHER
+  - MODEL_NAME
+  - MODEL_ID
+  - LLM_
+  - AI_API
+  - EMBEDDING
+  - DEEPSEEK
+  - GROQ

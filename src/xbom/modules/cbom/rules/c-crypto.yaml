@@ -1,0 +1,134 @@
+rules:
+  # --- Weak Hash Algorithms ---
+  - id: xbom-c-weak-hash-md5
+    pattern-either:
+      - pattern: MD5(...)
+      - pattern: MD5_Init(...)
+      - pattern: MD5_Update(...)
+      - pattern: EVP_md5()
+    message: Use of weak MD5 hash algorithm
+    severity: WARNING
+    languages: [c, cpp]
+    metadata:
+      category: security
+      subcategory: cryptography
+      xbom:
+        asset_type: algorithm
+        name: MD5
+        primitive: hash
+        parameter_set: "128"
+        weakness: weak_algorithm
+
+  - id: xbom-c-weak-hash-sha1
+    pattern-either:
+      - pattern: SHA1(...)
+      - pattern: SHA1_Init(...)
+      - pattern: SHA1_Update(...)
+      - pattern: EVP_sha1()
+    message: Use of weak SHA-1 hash algorithm
+    severity: WARNING
+    languages: [c, cpp]
+    metadata:
+      category: security
+      subcategory: cryptography
+      xbom:
+        asset_type: algorithm
+        name: SHA-1
+        primitive: hash
+        parameter_set: "160"
+        weakness: weak_algorithm
+
+  # --- Weak Symmetric Ciphers ---
+  - id: xbom-c-weak-cipher-des
+    pattern-either:
+      - pattern: DES_set_key(...)
+      - pattern: DES_ecb_encrypt(...)
+      - pattern: DES_cbc_encrypt(...)
+      - pattern: EVP_des_ecb()
+      - pattern: EVP_des_cbc()
+      - pattern: EVP_des_ede3_cbc()
+    message: Use of weak DES/3DES cipher
+    severity: WARNING
+    languages: [c, cpp]
+    metadata:
+      category: security
+      subcategory: cryptography
+      xbom:
+        asset_type: algorithm
+        name: DES
+        primitive: block-cipher
+        parameter_set: "56"
+        weakness: weak_algorithm
+
+  - id: xbom-c-weak-cipher-rc4
+    pattern-either:
+      - pattern: RC4(...)
+      - pattern: RC4_set_key(...)
+      - pattern: EVP_rc4()
+    message: Use of weak RC4 stream cipher
+    severity: WARNING
+    languages: [c, cpp]
+    metadata:
+      category: security
+      subcategory: cryptography
+      xbom:
+        asset_type: algorithm
+        name: RC4
+        primitive: stream-cipher
+        weakness: weak_algorithm
+
+  # --- Insecure TLS/SSL ---
+  - id: xbom-c-insecure-ssl-method
+    pattern-either:
+      - pattern: SSLv2_method()
+      - pattern: SSLv2_client_method()
+      - pattern: SSLv2_server_method()
+      - pattern: SSLv3_method()
+      - pattern: SSLv3_client_method()
+      - pattern: SSLv3_server_method()
+      - pattern: SSLv23_method()
+      - pattern: TLSv1_method()
+      - pattern: TLSv1_client_method()
+      - pattern: TLSv1_1_method()
+      - pattern: TLSv1_1_client_method()
+    message: Use of deprecated SSL/TLS method
+    severity: ERROR
+    languages: [c, cpp]
+    metadata:
+      category: security
+      subcategory: cryptography
+      xbom:
+        asset_type: protocol
+        name: TLS
+        weakness: deprecated_protocol
+
+  - id: xbom-c-ssl-no-verify
+    pattern: SSL_CTX_set_verify($CTX, SSL_VERIFY_NONE, ...)
+    message: SSL certificate verification disabled
+    severity: ERROR
+    languages: [c, cpp]
+    metadata:
+      category: security
+      subcategory: cryptography
+      xbom:
+        asset_type: protocol
+        name: TLS
+        weakness: deprecated_protocol
+
+  # --- Insecure Random ---
+  - id: xbom-c-insecure-random
+    pattern-either:
+      - pattern: rand()
+      - pattern: srand(...)
+    message: >
+      Use of non-cryptographic random function.
+      Use RAND_bytes() or getrandom() for security-sensitive values.
+    severity: INFO
+    languages: [c, cpp]
+    metadata:
+      category: security
+      subcategory: cryptography
+      xbom:
+        asset_type: related-crypto-material
+        name: PRNG
+        weakness: weak_algorithm

@@ -1,0 +1,16 @@
+# CBOM risk scoring weights and severity thresholds
+
+weights:
+  expired_certificate: 30
+  weak_algorithm: 25
+  quantum_vulnerable: 20
+  insecure_cipher_suite: 20
+  deprecated_protocol: 20
+  small_key_size: 15
+
+# Severity thresholds (score >= threshold)
+severity_thresholds:
+  critical: 76
+  high: 51
+  medium: 26
+  low: 1

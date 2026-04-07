@@ -1,0 +1,224 @@
+# AI/ML package catalog — static registry of known AI/ML packages
+# Maps (ecosystem, package_name) to category and description
+# Used to classify SBOM components as AI-related
+
+# Categories:
+#   llm-provider, agent-framework, ml-framework, vector-store, graph-db,
+#   rag-component, embedding, model-serving, observability, guardrail,
+#   agent-tool, prompt-engineering, evaluation, data-pipeline, mcp
+
+packages:
+  # === LLM Providers ===
+  - {ecosystem: pypi, name: openai, category: llm-provider, description: "OpenAI Python SDK (GPT, DALL-E, Whisper, Embeddings)"}
+  - {ecosystem: npm, name: openai, category: llm-provider, description: "OpenAI Node.js SDK"}
+  - {ecosystem: maven, name: "com.theokanning.openai-gpt3-java", category: llm-provider, description: "Community OpenAI Java client"}
+  - {ecosystem: go, name: "github.com/sashabaranov/go-openai", category: llm-provider, description: "OpenAI Go client"}
+  - {ecosystem: pypi, name: anthropic, category: llm-provider, description: "Anthropic Python SDK (Claude)"}
+  - {ecosystem: npm, name: "@anthropic-ai/sdk", category: llm-provider, description: "Anthropic Node.js SDK (Claude)"}
+  - {ecosystem: pypi, name: google-generativeai, category: llm-provider, description: "Google Generative AI Python SDK (Gemini)"}
+  - {ecosystem: npm, name: "@google/generative-ai", category: llm-provider, description: "Google Generative AI JS SDK (Gemini)"}
+  - {ecosystem: pypi, name: google-cloud-aiplatform, category: llm-provider, description: "Google Vertex AI Python SDK"}
+  - {ecosystem: pypi, name: mistralai, category: llm-provider, description: "Mistral AI Python SDK"}
+  - {ecosystem: npm, name: "@mistralai/mistralai", category: llm-provider, description: "Mistral AI Node.js SDK"}
+  - {ecosystem: pypi, name: cohere, category: llm-provider, description: "Cohere Python SDK (Command, Embed, Rerank)"}
+  - {ecosystem: npm, name: cohere-ai, category: llm-provider, description: "Cohere Node.js SDK"}
+  - {ecosystem: pypi, name: ollama, category: llm-provider, description: "Ollama Python client for local LLMs"}
+  - {ecosystem: npm, name: ollama, category: llm-provider, description: "Ollama Node.js client for local LLMs"}
+  - {ecosystem: go, name: "github.com/ollama/ollama", category: llm-provider, description: "Ollama Go client"}
+  - {ecosystem: pypi, name: deepseek, category: llm-provider, description: "DeepSeek Python SDK"}
+  - {ecosystem: pypi, name: boto3, category: llm-provider, description: "AWS SDK for Python (includes Bedrock Runtime)"}
+  - {ecosystem: npm, name: "@aws-sdk/client-bedrock-runtime", category: llm-provider, description: "AWS Bedrock Runtime JS SDK"}
+  - {ecosystem: npm, name: "@aws-sdk/client-bedrock", category: llm-provider, description: "AWS Bedrock management JS SDK"}
+  - {ecosystem: maven, name: "software.amazon.awssdk:bedrockruntime", category: llm-provider, description: "AWS Bedrock Runtime Java SDK"}
+  - {ecosystem: go, name: "github.com/aws/aws-sdk-go-v2/service/bedrockruntime", category: llm-provider, description: "AWS Bedrock Runtime Go SDK"}
+  - {ecosystem: pypi, name: azure-ai-inference, category: llm-provider, description: "Azure AI Inference Python SDK"}
+  - {ecosystem: npm, name: "@azure/openai", category: llm-provider, description: "Azure OpenAI Node.js SDK"}
+  - {ecosystem: pypi, name: groq, category: llm-provider, description: "Groq Python SDK (fast LLM inference)"}
+  - {ecosystem: pypi, name: together, category: llm-provider, description: "Together AI Python SDK"}
+  - {ecosystem: pypi, name: fireworks-ai, category: llm-provider, description: "Fireworks AI Python SDK"}
+  - {ecosystem: pypi, name: replicate, category: llm-provider, description: "Replicate Python SDK (hosted model inference)"}
+  - {ecosystem: npm, name: replicate, category: llm-provider, description: "Replicate Node.js SDK"}
+  - {ecosystem: pypi, name: litellm, category: llm-provider, description: "Unified LLM API proxy (100+ providers)"}
+
+  # === Agent Frameworks ===
+  - {ecosystem: pypi, name: langchain, category: agent-framework, description: "LangChain orchestration framework"}
+  - {ecosystem: pypi, name: langchain-core, category: agent-framework, description: "LangChain core abstractions"}
+  - {ecosystem: pypi, name: langchain-community, category: agent-framework, description: "LangChain community integrations"}
+  - {ecosystem: pypi, name: langchain-openai, category: agent-framework, description: "LangChain OpenAI integration"}
+  - {ecosystem: pypi, name: langchain-anthropic, category: agent-framework, description: "LangChain Anthropic integration"}
+  - {ecosystem: pypi, name: langgraph, category: agent-framework, description: "LangGraph stateful agent graphs"}
+  - {ecosystem: npm, name: langchain, category: agent-framework, description: "LangChain JS/TS orchestration framework"}
+  - {ecosystem: npm, name: "@langchain/core", category: agent-framework, description: "LangChain JS core abstractions"}
+  - {ecosystem: npm, name: "@langchain/openai", category: agent-framework, description: "LangChain JS OpenAI integration"}
+  - {ecosystem: npm, name: "@langchain/anthropic", category: agent-framework, description: "LangChain JS Anthropic integration"}
+  - {ecosystem: npm, name: "@langchain/langgraph", category: agent-framework, description: "LangGraph JS stateful agent graphs"}
+  - {ecosystem: pypi, name: crewai, category: agent-framework, description: "CrewAI multi-agent orchestration"}
+  - {ecosystem: pypi, name: autogen, category: agent-framework, description: "Microsoft AutoGen multi-agent framework"}
+  - {ecosystem: pypi, name: pyautogen, category: agent-framework, description: "Microsoft AutoGen (pyautogen distribution)"}
+  - {ecosystem: pypi, name: ag2, category: agent-framework, description: "AG2 (AutoGen successor) multi-agent framework"}
+  - {ecosystem: pypi, name: llama-index, category: agent-framework, description: "LlamaIndex data framework for LLM apps"}
+  - {ecosystem: pypi, name: llama-index-core, category: agent-framework, description: "LlamaIndex core library"}
+  - {ecosystem: npm, name: llamaindex, category: agent-framework, description: "LlamaIndex JS/TS framework"}
+  - {ecosystem: pypi, name: haystack-ai, category: agent-framework, description: "Haystack AI pipeline framework (v2+)"}
+  - {ecosystem: pypi, name: farm-haystack, category: agent-framework, description: "Haystack AI pipeline framework (v1)"}
+  - {ecosystem: pypi, name: semantic-kernel, category: agent-framework, description: "Microsoft Semantic Kernel AI orchestration"}
+  - {ecosystem: npm, name: semantic-kernel, category: agent-framework, description: "Semantic Kernel JS SDK"}
+  - {ecosystem: maven, name: "com.microsoft.semantic-kernel:semantickernel-api", category: agent-framework, description: "Semantic Kernel Java SDK"}
+  - {ecosystem: pypi, name: pydantic-ai, category: agent-framework, description: "Pydantic AI agent framework"}
+  - {ecosystem: pypi, name: smolagents, category: agent-framework, description: "Hugging Face smolagents lightweight agent framework"}
+  - {ecosystem: pypi, name: strands-agents, category: agent-framework, description: "Strands Agents SDK"}
+  - {ecosystem: pypi, name: strands-agents-tools, category: agent-framework, description: "Strands Agents tools library"}
+  - {ecosystem: pypi, name: strands-agents-builder, category: agent-framework, description: "Strands Agents declarative agent builder"}
+  - {ecosystem: npm, name: mastra, category: agent-framework, description: "Mastra TypeScript AI agent framework"}
+  - {ecosystem: npm, name: "@mastra/core", category: agent-framework, description: "Mastra core library"}
+  - {ecosystem: npm, name: ai, category: agent-framework, description: "Vercel AI SDK for building AI applications"}
+  - {ecosystem: npm, name: "@ai-sdk/openai", category: agent-framework, description: "Vercel AI SDK OpenAI provider"}
+  - {ecosystem: npm, name: "@ai-sdk/anthropic", category: agent-framework, description: "Vercel AI SDK Anthropic provider"}
+  - {ecosystem: npm, name: "@ai-sdk/google", category: agent-framework, description: "Vercel AI SDK Google provider"}
+  - {ecosystem: pypi, name: dspy, category: agent-framework, description: "DSPy programming framework for LLMs"}
+  - {ecosystem: pypi, name: dspy-ai, category: agent-framework, description: "DSPy AI framework (legacy distribution)"}
+  - {ecosystem: maven, name: "org.springframework.ai:spring-ai-core", category: agent-framework, description: "Spring AI core framework"}
+  - {ecosystem: maven, name: "org.springframework.ai:spring-ai-openai", category: agent-framework, description: "Spring AI OpenAI integration"}
+
+  # === ML Frameworks ===
+  - {ecosystem: pypi, name: tensorflow, category: ml-framework, description: "TensorFlow deep learning framework"}
+  - {ecosystem: pypi, name: tensorflow-gpu, category: ml-framework, description: "TensorFlow with GPU support"}
+  - {ecosystem: npm, name: "@tensorflow/tfjs", category: ml-framework, description: "TensorFlow.js for browser/Node.js ML"}
+  - {ecosystem: maven, name: "org.tensorflow:tensorflow-core-platform", category: ml-framework, description: "TensorFlow Java SDK"}
+  - {ecosystem: pypi, name: torch, category: ml-framework, description: "PyTorch deep learning framework"}
+  - {ecosystem: pypi, name: torchvision, category: ml-framework, description: "PyTorch computer vision utilities"}
+  - {ecosystem: pypi, name: torchaudio, category: ml-framework, description: "PyTorch audio processing utilities"}
+  - {ecosystem: pypi, name: scikit-learn, category: ml-framework, description: "scikit-learn machine learning library"}
+  - {ecosystem: pypi, name: jax, category: ml-framework, description: "Google JAX numerical computing library"}
+  - {ecosystem: pypi, name: jaxlib, category: ml-framework, description: "JAX XLA compilation backend"}
+  - {ecosystem: pypi, name: flax, category: ml-framework, description: "Flax neural network library for JAX"}
+  - {ecosystem: pypi, name: keras, category: ml-framework, description: "Keras high-level deep learning API"}
+  - {ecosystem: pypi, name: xgboost, category: ml-framework, description: "XGBoost gradient boosting library"}
+  - {ecosystem: pypi, name: lightgbm, category: ml-framework, description: "LightGBM gradient boosting framework"}
+  - {ecosystem: pypi, name: catboost, category: ml-framework, description: "CatBoost gradient boosting library"}
+  - {ecosystem: pypi, name: transformers, category: ml-framework, description: "Hugging Face Transformers (NLP, vision, audio models)"}
+  - {ecosystem: pypi, name: datasets, category: ml-framework, description: "Hugging Face Datasets library"}
+  - {ecosystem: pypi, name: accelerate, category: ml-framework, description: "Hugging Face Accelerate for distributed training"}
+  - {ecosystem: pypi, name: peft, category: ml-framework, description: "Hugging Face PEFT (parameter-efficient fine-tuning)"}
+  - {ecosystem: pypi, name: trl, category: ml-framework, description: "Hugging Face TRL (transformer reinforcement learning)"}
+  - {ecosystem: npm, name: "@huggingface/inference", category: ml-framework, description: "Hugging Face Inference JS client"}
+  - {ecosystem: npm, name: "@huggingface/transformers", category: ml-framework, description: "Hugging Face Transformers.js"}
+  - {ecosystem: pypi, name: spacy, category: ml-framework, description: "spaCy NLP library"}
+  - {ecosystem: pypi, name: onnx, category: ml-framework, description: "ONNX model format library"}
+
+  # === Vector Stores ===
+  - {ecosystem: pypi, name: chromadb, category: vector-store, description: "Chroma open-source embedding database"}
+  - {ecosystem: npm, name: chromadb, category: vector-store, description: "Chroma JS client"}
+  - {ecosystem: pypi, name: pinecone-client, category: vector-store, description: "Pinecone vector database Python client"}
+  - {ecosystem: pypi, name: pinecone, category: vector-store, description: "Pinecone vector database Python SDK"}
+  - {ecosystem: npm, name: "@pinecone-database/pinecone", category: vector-store, description: "Pinecone Node.js SDK"}
+  - {ecosystem: pypi, name: weaviate-client, category: vector-store, description: "Weaviate vector database Python client"}
+  - {ecosystem: npm, name: weaviate-client, category: vector-store, description: "Weaviate Node.js client"}
+  - {ecosystem: go, name: "github.com/weaviate/weaviate-go-client", category: vector-store, description: "Weaviate Go client"}
+  - {ecosystem: pypi, name: qdrant-client, category: vector-store, description: "Qdrant vector database Python client"}
+  - {ecosystem: npm, name: "@qdrant/js-client-rest", category: vector-store, description: "Qdrant JS REST client"}
+  - {ecosystem: go, name: "github.com/qdrant/go-client", category: vector-store, description: "Qdrant Go client"}
+  - {ecosystem: pypi, name: pymilvus, category: vector-store, description: "Milvus vector database Python SDK"}
+  - {ecosystem: go, name: "github.com/milvus-io/milvus-sdk-go", category: vector-store, description: "Milvus Go SDK"}
+  - {ecosystem: maven, name: "io.milvus:milvus-sdk-java", category: vector-store, description: "Milvus Java SDK"}
+  - {ecosystem: pypi, name: faiss-cpu, category: vector-store, description: "FAISS CPU similarity search library"}
+  - {ecosystem: pypi, name: faiss-gpu, category: vector-store, description: "FAISS GPU similarity search library"}
+  - {ecosystem: pypi, name: pgvector, category: vector-store, description: "pgvector Python client for PostgreSQL vector search"}
+  - {ecosystem: npm, name: pgvector, category: vector-store, description: "pgvector Node.js client"}
+  - {ecosystem: pypi, name: lancedb, category: vector-store, description: "LanceDB serverless vector database"}
+
+  # === Embedding ===
+  - {ecosystem: pypi, name: sentence-transformers, category: embedding, description: "Sentence Transformers embedding library"}
+  - {ecosystem: pypi, name: fastembed, category: embedding, description: "FastEmbed lightweight embedding library"}
+  - {ecosystem: pypi, name: nomic, category: embedding, description: "Nomic embedding and data mapping"}
+  - {ecosystem: pypi, name: tiktoken, category: embedding, description: "OpenAI tiktoken tokenizer"}
+  - {ecosystem: pypi, name: tokenizers, category: embedding, description: "Hugging Face fast tokenizers"}
+  - {ecosystem: npm, name: "@xenova/transformers", category: embedding, description: "Transformers.js for browser-side embeddings"}
+
+  # === Model Serving ===
+  - {ecosystem: pypi, name: vllm, category: model-serving, description: "vLLM high-throughput LLM serving engine"}
+  - {ecosystem: pypi, name: llama-cpp-python, category: model-serving, description: "Python bindings for llama.cpp (GGUF inference)"}
+  - {ecosystem: npm, name: node-llama-cpp, category: model-serving, description: "Node.js bindings for llama.cpp"}
+  - {ecosystem: pypi, name: onnxruntime, category: model-serving, description: "ONNX Runtime inference engine"}
+  - {ecosystem: pypi, name: onnxruntime-gpu, category: model-serving, description: "ONNX Runtime with GPU acceleration"}
+  - {ecosystem: npm, name: onnxruntime-node, category: model-serving, description: "ONNX Runtime for Node.js"}
+  - {ecosystem: npm, name: onnxruntime-web, category: model-serving, description: "ONNX Runtime for web browsers"}
+  - {ecosystem: pypi, name: tensorrt-llm, category: model-serving, description: "NVIDIA TensorRT-LLM inference optimizer"}
+  - {ecosystem: pypi, name: triton, category: model-serving, description: "NVIDIA Triton inference server client"}
+  - {ecosystem: pypi, name: tritonclient, category: model-serving, description: "NVIDIA Triton Inference Server client library"}
+  - {ecosystem: pypi, name: ctransformers, category: model-serving, description: "C Transformers Python bindings for GGUF models"}
+  - {ecosystem: pypi, name: text-generation, category: model-serving, description: "Hugging Face Text Generation Inference client"}
+  - {ecosystem: go, name: "github.com/ollama/ollama", category: model-serving, description: "Ollama Go server/client for local LLMs"}
+  - {ecosystem: pypi, name: bedrock-agentcore, category: model-serving, description: "AWS Bedrock AgentCore runtime and memory services"}
+
+  # === Graph Databases (AI context) ===
+  - {ecosystem: pypi, name: falkordb, category: graph-db, description: "FalkorDB graph database Python client"}
+  - {ecosystem: pypi, name: falkordb-bulk-loader, category: graph-db, description: "FalkorDB bulk data loader"}
+  - {ecosystem: pypi, name: neo4j, category: graph-db, description: "Neo4j graph database driver (used in knowledge graphs / RAG)"}
+  - {ecosystem: npm, name: neo4j-driver, category: graph-db, description: "Neo4j Node.js driver"}
+  - {ecosystem: maven, name: "org.neo4j.driver:neo4j-java-driver", category: graph-db, description: "Neo4j Java driver"}
+  - {ecosystem: go, name: "github.com/neo4j/neo4j-go-driver", category: graph-db, description: "Neo4j Go driver"}
+  - {ecosystem: pypi, name: langchain-neo4j, category: graph-db, description: "LangChain Neo4j integration for knowledge graphs"}
+  - {ecosystem: pypi, name: py2neo, category: graph-db, description: "Py2neo Neo4j Python library"}
+
+  # === Observability ===
+  - {ecosystem: pypi, name: langfuse, category: observability, description: "Langfuse LLM observability & tracing"}
+  - {ecosystem: npm, name: langfuse, category: observability, description: "Langfuse JS SDK"}
+  - {ecosystem: pypi, name: langsmith, category: observability, description: "LangSmith LLM tracing & evaluation"}
+  - {ecosystem: pypi, name: arize-phoenix, category: observability, description: "Arize Phoenix LLM observability"}
+  - {ecosystem: pypi, name: openinference-instrumentation, category: observability, description: "OpenInference instrumentation for LLM tracing"}
+  - {ecosystem: pypi, name: wandb, category: observability, description: "Weights & Biases experiment tracking"}
+  - {ecosystem: pypi, name: mlflow, category: observability, description: "MLflow ML lifecycle management"}
+  - {ecosystem: pypi, name: openllmetry, category: observability, description: "OpenLLMetry (Traceloop) LLM telemetry"}
+  - {ecosystem: npm, name: langfuse-langchain, category: observability, description: "Langfuse LangChain JS integration"}
+  - {ecosystem: pypi, name: helicone, category: observability, description: "Helicone LLM observability proxy"}
+  - {ecosystem: npm, name: "@helicone/helicone", category: observability, description: "Helicone Node.js SDK"}
+  - {ecosystem: pypi, name: structlog, category: observability, description: "Structured logging library"}
+
+  # === Guardrails ===
+  - {ecosystem: pypi, name: nemoguardrails, category: guardrail, description: "NVIDIA NeMo Guardrails for LLM safety"}
+  - {ecosystem: pypi, name: guardrails-ai, category: guardrail, description: "Guardrails AI validation framework"}
+  - {ecosystem: pypi, name: rebuff, category: guardrail, description: "Rebuff prompt injection detection"}
+  - {ecosystem: pypi, name: llm-guard, category: guardrail, description: "LLM Guard input/output scanner"}
+  - {ecosystem: npm, name: promptfoo, category: guardrail, description: "Promptfoo LLM testing & red-teaming"}
+
+  # === RAG Components ===
+  - {ecosystem: pypi, name: unstructured, category: rag-component, description: "Unstructured document parsing for RAG pipelines"}
+  - {ecosystem: pypi, name: unstructured-client, category: rag-component, description: "Unstructured API client for document ingestion"}
+  - {ecosystem: pypi, name: langchain-text-splitters, category: rag-component, description: "LangChain text splitting utilities for chunking"}
+  - {ecosystem: pypi, name: llama-parse, category: rag-component, description: "LlamaParse document parser for RAG"}
+  - {ecosystem: pypi, name: docling, category: rag-component, description: "IBM Docling document conversion for AI"}
+  - {ecosystem: pypi, name: pypdf, category: rag-component, description: "PyPDF for PDF extraction in RAG pipelines"}
+
+  # === Evaluation ===
+  - {ecosystem: pypi, name: ragas, category: evaluation, description: "RAGAS evaluation framework for RAG pipelines"}
+  - {ecosystem: pypi, name: deepeval, category: evaluation, description: "DeepEval LLM evaluation framework"}
+  - {ecosystem: pypi, name: trulens, category: evaluation, description: "TruLens LLM app evaluation and tracking"}
+  - {ecosystem: pypi, name: giskard, category: evaluation, description: "Giskard AI model testing and evaluation"}
+  - {ecosystem: pypi, name: promptfoo, category: evaluation, description: "Promptfoo LLM testing and red-teaming"}
+
+  # === Prompt Engineering ===
+  - {ecosystem: pypi, name: guidance, category: prompt-engineering, description: "Microsoft Guidance structured LLM prompting"}
+  - {ecosystem: pypi, name: outlines, category: prompt-engineering, description: "Outlines structured generation library"}
+  - {ecosystem: pypi, name: instructor, category: prompt-engineering, description: "Instructor structured outputs from LLMs via Pydantic"}
+  - {ecosystem: npm, name: instructor, category: prompt-engineering, description: "Instructor JS structured LLM outputs"}
+
+  # === MCP ===
+  - {ecosystem: pypi, name: mcp, category: mcp, description: "Model Context Protocol Python SDK"}
+  - {ecosystem: pypi, name: fastmcp, category: mcp, description: "FastMCP server framework"}
+  - {ecosystem: npm, name: "@modelcontextprotocol/sdk", category: mcp, description: "MCP TypeScript SDK"}
+
+  # === Agent Tools ===
+  - {ecosystem: pypi, name: tavily-python, category: agent-tool, description: "Tavily search API for AI agents"}
+  - {ecosystem: pypi, name: duckduckgo-search, category: agent-tool, description: "DuckDuckGo search for AI agents"}
+  - {ecosystem: pypi, name: serpapi, category: agent-tool, description: "SerpAPI Google search for AI agents"}
+  - {ecosystem: pypi, name: e2b, category: agent-tool, description: "E2B code execution sandbox for AI agents"}
+  - {ecosystem: npm, name: "@anthropic-ai/tool-use", category: agent-tool, description: "Anthropic tool use utilities"}
+  - {ecosystem: pypi, name: browserbase, category: agent-tool, description: "Browserbase browser automation for AI agents"}
+  - {ecosystem: pypi, name: firecrawl-py, category: agent-tool, description: "Firecrawl web scraping for AI agents"}
+  - {ecosystem: pypi, name: playwright, category: agent-tool, description: "Playwright browser automation (used as AI agent tool)"}
+  - {ecosystem: pypi, name: exa-py, category: agent-tool, description: "Exa AI-powered search API"}
+  - {ecosystem: pypi, name: brave-search, category: agent-tool, description: "Brave Search API for AI agents"}
+
+  # === Data Pipelines ===
+  - {ecosystem: pypi, name: apache-airflow-providers-openai, category: data-pipeline, description: "Airflow OpenAI provider for AI pipelines"}

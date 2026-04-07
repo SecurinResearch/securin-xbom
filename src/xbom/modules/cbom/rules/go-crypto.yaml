@@ -1,0 +1,136 @@
+rules:
+  # --- Weak Hash Algorithms ---
+  - id: xbom-go-weak-hash-md5
+    pattern-either:
+      - pattern: md5.New()
+      - pattern: md5.Sum(...)
+    message: Use of weak MD5 hash algorithm
+    severity: WARNING
+    languages: [go]
+    metadata:
+      category: security
+      subcategory: cryptography
+      xbom:
+        asset_type: algorithm
+        name: MD5
+        primitive: hash
+        parameter_set: "128"
+        weakness: weak_algorithm
+
+  - id: xbom-go-weak-hash-sha1
+    pattern-either:
+      - pattern: sha1.New()
+      - pattern: sha1.Sum(...)
+    message: Use of weak SHA-1 hash algorithm
+    severity: WARNING
+    languages: [go]
+    metadata:
+      category: security
+      subcategory: cryptography
+      xbom:
+        asset_type: algorithm
+        name: SHA-1
+        primitive: hash
+        parameter_set: "160"
+        weakness: weak_algorithm
+
+  # --- Weak Symmetric Ciphers ---
+  - id: xbom-go-weak-cipher-des
+    pattern-either:
+      - pattern: des.NewCipher(...)
+      - pattern: des.NewTripleDESCipher(...)
+    message: Use of weak DES/3DES cipher
+    severity: WARNING
+    languages: [go]
+    metadata:
+      category: security
+      subcategory: cryptography
+      xbom:
+        asset_type: algorithm
+        name: DES
+        primitive: block-cipher
+        parameter_set: "56"
+        weakness: weak_algorithm
+
+  - id: xbom-go-weak-cipher-rc4
+    pattern: rc4.NewCipher(...)
+    message: Use of weak RC4 stream cipher
+    severity: WARNING
+    languages: [go]
+    metadata:
+      category: security
+      subcategory: cryptography
+      xbom:
+        asset_type: algorithm
+        name: RC4
+        primitive: stream-cipher
+        weakness: weak_algorithm
+
+  # --- Insecure TLS/SSL ---
+  - id: xbom-go-insecure-tls-skip-verify
+    pattern: "InsecureSkipVerify: true"
+    message: TLS certificate verification disabled
+    severity: ERROR
+    languages: [go]
+    metadata:
+      category: security
+      subcategory: cryptography
+      xbom:
+        asset_type: protocol
+        name: TLS
+        weakness: deprecated_protocol
+
+  - id: xbom-go-insecure-tls-min-version
+    pattern-either:
+      - pattern: "MinVersion: tls.VersionTLS10"
+      - pattern: "MinVersion: tls.VersionTLS11"
+      - pattern: "MinVersion: tls.VersionSSL30"
+      - pattern: "MinVersion: 0"
+    message: TLS minimum version set below TLS 1.2
+    severity: ERROR
+    languages: [go]
+    metadata:
+      category: security
+      subcategory: cryptography
+      xbom:
+        asset_type: protocol
+        name: TLS
+        weakness: deprecated_protocol
+
+  # --- Small Key Sizes ---
+  - id: xbom-go-small-rsa-key
+    patterns:
+      - pattern: rsa.GenerateKey($RAND, $SIZE)
+      - metavariable-comparison:
+          metavariable: $SIZE
+          comparison: $SIZE < 2048
+    message: RSA key size less than 2048 bits
+    severity: WARNING
+    languages: [go]
+    metadata:
+      category: security
+      subcategory: cryptography
+      xbom:
+        asset_type: algorithm
+        name: RSA
+        primitive: pk
+        weakness: small_key_size
+
+  # --- Insecure Random ---
+  - id: xbom-go-insecure-random
+    pattern-either:
+      - pattern: rand.Intn(...)
+      - pattern: rand.Int(...)
+      - pattern: rand.Read(...)
+    message: >
+      Use of math/rand which is not cryptographically secure.
+      Use crypto/rand for security-sensitive values.
+    severity: INFO
+    languages: [go]
+    metadata:
+      category: security
+      subcategory: cryptography
+      xbom:
+        asset_type: related-crypto-material
+        name: PRNG
+        weakness: weak_algorithm

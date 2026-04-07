@@ -1,0 +1,20 @@
+# AI service network endpoint patterns
+# [regex, name, description]
+
+patterns:
+  - ['api\.openai\.com', openai, "OpenAI API endpoint"]
+  - ['openai\.azure\.com', azure-openai, "Azure OpenAI endpoint"]
+  - ['api\.anthropic\.com', anthropic, "Anthropic API endpoint"]
+  - ['generativelanguage\.googleapis\.com', google-ai, "Google AI endpoint"]
+  - ['aiplatform\.googleapis\.com', vertex-ai, "Vertex AI endpoint"]
+  - ['api\.cohere\.ai', cohere, "Cohere API endpoint"]
+  - ['api\.mistral\.ai', mistral, "Mistral API endpoint"]
+  - ['api\.replicate\.com', replicate, "Replicate API endpoint"]
+  - ['api\.together\.xyz', together, "Together AI endpoint"]
+  - ['api-inference\.huggingface\.co', huggingface, "HuggingFace Inference API"]
+  - ['bedrock-runtime\.[^.]+\.amazonaws\.com', bedrock, "AWS Bedrock endpoint"]
+  - ['localhost:11434', ollama-local, "Local Ollama server"]
+  - ['api\.x\.ai', xai, "xAI API endpoint"]
+  - ['api\.deepseek\.com', deepseek, "DeepSeek API endpoint"]
+  - ['api\.groq\.com', groq, "Groq API endpoint"]
+  - ['api\.fireworks\.ai', fireworks, "Fireworks AI endpoint"]

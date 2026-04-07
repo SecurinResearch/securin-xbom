@@ -1,0 +1,100 @@
+# Post-Quantum Cryptography classification tables
+
+# Algorithms completely broken by Shor's algorithm (no key size helps)
+quantum_vulnerable:
+  - rsa
+  - ecdsa
+  - ecdh
+  - ecc
+  - dsa
+  - dh
+  - dhe
+  - ed25519
+  - ed448
+  - x25519
+  - x448
+  - elgamal
+  - diffie-hellman
+  - secp256k1
+  - secp384r1
+  - secp521r1
+  - p-256
+  - p-384
+  - p-521
+  - curve25519
+  - curve448
+  - sm2
+
+# Symmetric / hash algorithms with NIST quantum security levels
+# Grover's algorithm halves effective key length
+# level: nistQuantumSecurityLevel, note: description
+quantum_safe_levels:
+  aes-256: {level: 5, note: "128-bit effective security under Grover's — safe"}
+  aes-192: {level: 3, note: "96-bit effective security under Grover's — adequate"}
+  aes-128: {level: 1, note: "64-bit effective security under Grover's — insufficient for long-term"}
+  chacha20: {level: 5, note: "256-bit key — safe under Grover's"}
+  chacha20-poly1305: {level: 5, note: "256-bit key — safe under Grover's"}
+  sha-256: {level: 1, note: "128-bit preimage resistance under Grover's — adequate"}
+  sha-384: {level: 3, note: "192-bit preimage resistance — safe"}
+  sha-512: {level: 5, note: "256-bit preimage resistance — safe"}
+  sha-3: {level: 5, note: "Quantum-resistant hash family"}
+  sha3-256: {level: 3, note: "128-bit preimage resistance under Grover's"}
+  sha3-384: {level: 3, note: "192-bit preimage resistance"}
+  sha3-512: {level: 5, note: "256-bit preimage resistance"}
+  hmac: {level: 3, note: "Security follows underlying hash"}
+  hkdf: {level: 3, note: "Security follows underlying hash"}
+  # Classical weak (also quantum-weak)
+  3des: {level: 0, note: "56-bit effective — critically insufficient under Grover's"}
+  des: {level: 0, note: "28-bit effective — critically insufficient under Grover's"}
+
+# NIST Post-Quantum Cryptography standards and candidates
+pqc_algorithms:
+  # FIPS 203 — ML-KEM (Kyber)
+  ml-kem: {level: 3, note: "NIST PQC standard (FIPS 203)"}
+  ml-kem-512: {level: 1, note: "NIST PQC standard — security level 1"}
+  ml-kem-768: {level: 3, note: "NIST PQC standard — security level 3"}
+  ml-kem-1024: {level: 5, note: "NIST PQC standard — security level 5"}
+  kyber: {level: 3, note: "Pre-standardization name for ML-KEM"}
+  kyber512: {level: 1, note: "Pre-standardization — security level 1"}
+  kyber768: {level: 3, note: "Pre-standardization — security level 3"}
+  kyber1024: {level: 5, note: "Pre-standardization — security level 5"}
+  # FIPS 204 — ML-DSA (Dilithium)
+  ml-dsa: {level: 3, note: "NIST PQC standard (FIPS 204)"}
+  ml-dsa-44: {level: 2, note: "NIST PQC standard — security level 2"}
+  ml-dsa-65: {level: 3, note: "NIST PQC standard — security level 3"}
+  ml-dsa-87: {level: 5, note: "NIST PQC standard — security level 5"}
+  dilithium: {level: 3, note: "Pre-standardization name for ML-DSA"}
+  # FIPS 205 — SLH-DSA (SPHINCS+)
+  slh-dsa: {level: 3, note: "NIST PQC standard (FIPS 205)"}
+  sphincs+: {level: 3, note: "Pre-standardization name for SLH-DSA"}
+  sphincs: {level: 3, note: "Hash-based signature scheme"}
+  # Upcoming — FN-DSA (FALCON)
+  fn-dsa: {level: 5, note: "NIST PQC candidate (draft FIPS 206)"}
+  falcon: {level: 5, note: "Lattice-based signature — NIST candidate"}
+  # Upcoming — HQC (backup KEM)
+  hqc: {level: 3, note: "NIST PQC candidate — code-based KEM"}
+
+# Reasons for quantum vulnerability by algorithm family
+vuln_reasons:
+  rsa: "RSA broken by Shor's algorithm at any key size"
+  ecdsa: "ECDSA broken by Shor's algorithm on elliptic curves"
+  ecdh: "ECDH key exchange broken by Shor's algorithm"
+  ecc: "Elliptic curve cryptography broken by Shor's algorithm"
+  dsa: "DSA broken by Shor's algorithm (discrete log problem)"
+  dh: "Diffie-Hellman broken by Shor's algorithm (discrete log problem)"
+  dhe: "Diffie-Hellman Ephemeral broken by Shor's algorithm"
+  ed25519: "Ed25519 broken by Shor's algorithm (elliptic curve)"
+  ed448: "Ed448 broken by Shor's algorithm (elliptic curve)"
+  x25519: "X25519 key exchange broken by Shor's algorithm"
+  x448: "X448 key exchange broken by Shor's algorithm"
+  diffie-hellman: "Diffie-Hellman broken by Shor's algorithm"
+  elgamal: "ElGamal broken by Shor's algorithm (discrete log problem)"
+
+# Algorithm name aliases
+aliases:
+  desede: 3des
+  tripledes: 3des
+  diffie-hellman: dh
+  diffiehellman: dh
+  elliptic-curve: ecc
+  prng: prng

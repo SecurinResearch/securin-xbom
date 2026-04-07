@@ -1,0 +1,63 @@
+# Outbound HTTP client call detection patterns
+# For each language: library name, detect pattern, and URL extraction patterns
+# Note: f? before quotes handles Python f-strings like f"https://..."
+
+python:
+  - library: requests
+    detect: '(?:from|import)\s+requests\b'
+    patterns:
+      - 'requests\.(get|post|put|delete|patch|head|options)\s*\(\s*f?["''](https?://[^"''\s\)]+)'
+  - library: httpx
+    detect: '(?:from|import)\s+httpx\b'
+    patterns:
+      - 'httpx\.(get|post|put|delete|patch|head|options)\s*\(\s*f?["''](https?://[^"''\s\)]+)'
+      - 'httpx\.(?:Client|AsyncClient)\s*\(\s*(?:base_url\s*=\s*)?f?["''](https?://[^"''\s\)]+)'
+  - library: urllib
+    detect: '(?:from|import)\s+urllib'
+    patterns:
+      - 'urlopen\s*\(\s*f?["''](https?://[^"''\s\)]+)'
+      - 'Request\s*\(\s*f?["''](https?://[^"''\s\)]+)'
+  - library: aiohttp
+    detect: '(?:from|import)\s+aiohttp\b'
+    patterns:
+      - '\.(get|post|put|delete|patch)\s*\(\s*f?["''](https?://[^"''\s\)]+)'
+
+javascript:
+  - library: axios
+    detect: "require\\s*\\(\\s*['\"]axios['\"]\\s*\\)|import\\s+axios"
+    patterns:
+      - 'axios\.(get|post|put|delete|patch)\s*\(\s*[`"''](https?://[^`"''\s\)]+)'
+      - 'axios\s*\(\s*\{[^}]*url\s*:\s*[`"''](https?://[^`"''\s\)]+)'
+  - library: fetch
+    detect: null  # Built-in
+    patterns:
+      - 'fetch\s*\(\s*[`"''](https?://[^`"''\s\)]+)'
+  - library: got
+    detect: "require\\s*\\(\\s*['\"]got['\"]\\s*\\)|import\\s+got"
+    patterns:
+      - 'got\s*(?:\.\w+)?\s*\(\s*[`"''](https?://[^`"''\s\)]+)'
+  - library: node-fetch
+    detect: "require\\s*\\(\\s*['\"]node-fetch['\"]\\s*\\)"
+    patterns:
+      - 'fetch\s*\(\s*[`"''](https?://[^`"''\s\)]+)'
+
+java:
+  - library: okhttp
+    detect: 'import\s+okhttp3'
+    patterns:
+      - 'Request\.Builder\s*\(\s*\)\.url\s*\(\s*"(https?://[^"]+)"'
+  - library: httpclient
+    detect: 'import\s+java\.net\.http'
+    patterns:
+      - 'URI\.create\s*\(\s*"(https?://[^"]+)"'
+  - library: retrofit
+    detect: 'import\s+retrofit2'
+    patterns:
+      - '@(?:GET|POST|PUT|DELETE|PATCH)\s*\(\s*"(https?://[^"]+)"'
+
+go:
+  - library: net/http
+    detect: '"net/http"'
+    patterns:
+      - 'http\.(Get|Post|Head)\s*\(\s*"(https?://[^"]+)"'
+      - 'http\.NewRequest\s*\(\s*"(?:GET|POST|PUT|DELETE|PATCH)"\s*,\s*"(https?://[^"]+)"'

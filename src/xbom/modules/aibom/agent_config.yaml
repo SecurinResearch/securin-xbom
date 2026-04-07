@@ -1,0 +1,149 @@
+agent:
+  system_prompt: |
+    You are an AI/ML supply chain analyst. You receive software packages with their
+    metadata from the ecosyste.ms registry (name, description, keywords, repository URL)
+    and determine which are AI/ML components.
+
+    AI/ML components include but are NOT limited to:
+    - LLM providers and SDKs (OpenAI, Anthropic, Google AI, Mistral, Cohere, etc.)
+    - Agent frameworks (LangChain, CrewAI, AutoGen, LlamaIndex, etc.)
+    - ML frameworks (TensorFlow, PyTorch, scikit-learn, JAX, etc.)
+    - Vector databases and stores (ChromaDB, Pinecone, Qdrant, Weaviate, Milvus, FAISS, pgvector)
+    - Graph databases used in AI contexts (Neo4j with LangChain, etc.)
+    - RAG components (retrievers, document loaders, text splitters, chunkers)
+    - Embedding models and libraries (sentence-transformers, fastembed)
+    - Model serving infrastructure (vLLM, Ollama, TGI, ONNX Runtime, Triton)
+    - AI observability (Langfuse, LangSmith, Phoenix, W&B, MLflow)
+    - Guardrails and safety (NeMo Guardrails, Guardrails AI)
+    - Agent tools and MCP servers
+    - Prompt engineering libraries
+    - AI evaluation frameworks
+    - Data pipelines feeding AI systems (Unstructured, document loaders)
+
+    For each package, use the ecosyste.ms metadata (description + keywords) to decide.
+    Return a structured JSON classification.
+
+    Be precise about the category — don't just say "other". Use the specific category
+    that best fits. If a package is clearly NOT AI/ML related, mark is_ai_ml: false.
+
+  batch_classification_prompt: |
+    Classify each of the following software packages as AI/ML related or not.
+    Each package includes metadata from the ecosyste.ms registry.
+
+    Packages:
+    {packages_json}
+
+    For each package, respond with a JSON object containing:
+    - package_name: the package name
+    - purl: the package URL
+    - is_ai_ml: true if AI/ML related, false otherwise
+    - confidence: 0.0 to 1.0
+    - category: one of: llm-provider, agent-framework, ml-framework, vector-store,
+      graph-db, rag-component, embedding, model-serving, observability, guardrail,
+      agent-tool, prompt-engineering, evaluation, data-pipeline, mcp, other, none
+    - reasoning: brief explanation (1 sentence)
+
+    Respond with ONLY a JSON array. No markdown fences, no explanations outside the JSON.
+    [{{"package_name": "...", "purl": "...", "is_ai_ml": true, "confidence": 0.9, "category": "...", "reasoning": "..."}}]
+
+  single_classification_prompt: |
+    Classify this software package as AI/ML related or not.
+
+    Package: {package_name}
+    Ecosystem: {ecosystem}
+    Description: {description}
+    Keywords: {keywords}
+    Repository: {repository_url}
+
+    Respond with ONLY a JSON object:
+    {{"package_name": "{package_name}", "purl": "{purl}", "is_ai_ml": true/false, "confidence": 0.0-1.0, "category": "llm-provider|agent-framework|ml-framework|vector-store|graph-db|rag-component|embedding|model-serving|observability|guardrail|agent-tool|prompt-engineering|evaluation|data-pipeline|mcp|other|none", "reasoning": "brief explanation"}}
+
+model:
+  default_provider: "anthropic"
+  batch_size: 20
+  providers:
+    openai:
+      model_id: "gpt-4o-mini"
+      params:
+        temperature: 0.1
+        max_tokens: 4000
+    openai_like:
+      model_id: "gpt-4o-mini"
+      base_url: null
+      params:
+        temperature: 0.1
+        max_tokens: 4000
+    anthropic:
+      model_id: "claude-sonnet-4-20250514"
+      max_tokens: 4000
+      params:
+        temperature: 0.1
+    gemini:
+      model_id: "gemini-2.5-flash"
+      params:
+        temperature: 0.1
+        max_output_tokens: 4000
+    litellm_proxy:
+      model_id: null
+      base_url: null
+      use_litellm_proxy: true
+      params:
+        temperature: 0.1
+        max_tokens: 4000
+    bedrock:
+      model_id: "anthropic.claude-sonnet-4-20250514-v1:0"
+    azure_ai_foundry:
+      model_id: null
+      base_url: null
+      params:
+        temperature: 0.1
+        max_tokens: 4000
+    vertex_ai:
+      model_id: null
+      params:
+        temperature: 0.1
+        max_tokens: 4000
+
+# Keywords used ONLY as weak heuristic fallback when --enrich is not set.
+# With --enrich, the agent classifies based on full ecosyste.ms metadata.
+ai_keywords:
+  - machine-learning
+  - deep-learning
+  - llm
+  - ai
+  - artificial-intelligence
+  - neural-network
+  - nlp
+  - natural-language-processing
+  - computer-vision
+  - transformer
+  - gpt
+  - embedding
+  - vector-database
+  - rag
+  - langchain
+  - openai
+  - anthropic
+  - huggingface
+  - tensorflow
+  - pytorch
+  - scikit-learn
+  - ml
+  - generative-ai
+  - large-language-model
+  - chatbot
+  - text-generation
+  - inference
+  - model-serving
+  - reinforcement-learning
+  - data-science
+  - vector-store
+  - graph-database
+  - knowledge-graph
+  - agent
+  - prompt
+  - retrieval
+  - chunking
+  - tokenizer
+  - fine-tuning
+  - model-training

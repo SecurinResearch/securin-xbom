@@ -1,0 +1,41 @@
+# TLS scanner configuration — vulnerability IDs, protocol IDs, certificate fields
+
+# testssl.sh vulnerability IDs we track
+vuln_ids:
+  - heartbleed
+  - CCS
+  - ticketbleed
+  - ROBOT
+  - secure_renego
+  - secure_client_renego
+  - CRIME_TLS
+  - BREACH
+  - POODLE_SSL
+  - fallback_SCSV
+  - SWEET32
+  - FREAK
+  - DROWN
+  - LOGJAM
+  - BEAST
+  - LUCKY13
+  - RC4
+
+# Protocol IDs: id -> [proto_name, version, is_deprecated]
+protocol_ids:
+  SSLv2: [SSL, "2.0", true]
+  SSLv3: [SSL, "3.0", true]
+  TLS1: [TLS, "1.0", true]
+  TLS1_1: [TLS, "1.1", true]
+  TLS1_2: [TLS, "1.2", false]
+  TLS1_3: [TLS, "1.3", false]
+
+# Certificate-related testssl.sh IDs
+cert_ids:
+  - cert_signatureAlgorithm
+  - cert_keySize
+  - cert_notBefore
+  - cert_notAfter
+  - cert_CN
+  - cert_SAN
+  - cert_issuerCN
+  - cert_chain_of_trust

@@ -1,0 +1,152 @@
+rules:
+  # =========================================================
+  # Quantum-Vulnerable Algorithm Detection — Python
+  # =========================================================
+
+  - id: xbom-python-pqc-vulnerable-rsa-keygen
+    pattern-either:
+      - pattern: rsa.generate_private_key(...)
+      - pattern: RSA.generate(...)
+    message: >
+      RSA key generation detected. RSA is completely broken by Shor's algorithm
+      regardless of key size. Migrate to ML-KEM (FIPS 203) or ML-DSA (FIPS 204).
+    severity: WARNING
+    languages: [python]
+    metadata:
+      category: security
+      subcategory: post-quantum
+      xbom:
+        asset_type: algorithm
+        name: RSA
+        primitive: pk
+        weakness: quantum_vulnerable
+
+  - id: xbom-python-pqc-vulnerable-ec-keygen
+    pattern-either:
+      - pattern: ec.generate_private_key(...)
+      - pattern: ECC.generate(...)
+      - pattern: ec.SECP256R1()
+      - pattern: ec.SECP384R1()
+      - pattern: ec.SECP521R1()
+    message: >
+      Elliptic curve key generation detected. All ECC is broken by Shor's algorithm.
+      Migrate to ML-DSA (FIPS 204) for signatures or ML-KEM (FIPS 203) for key exchange.
+    severity: WARNING
+    languages: [python]
+    metadata:
+      category: security
+      subcategory: post-quantum
+      xbom:
+        asset_type: algorithm
+        name: ECDSA
+        primitive: pk
+        weakness: quantum_vulnerable
+
+  - id: xbom-python-pqc-vulnerable-dh
+    pattern-either:
+      - pattern: dh.generate_parameters(...)
+      - pattern: dh.DHParameterNumbers(...)
+    message: >
+      Diffie-Hellman key exchange detected. DH is broken by Shor's algorithm.
+      Migrate to ML-KEM (FIPS 203).
+    severity: WARNING
+    languages: [python]
+    metadata:
+      category: security
+      subcategory: post-quantum
+      xbom:
+        asset_type: algorithm
+        name: DH
+        primitive: pk
+        weakness: quantum_vulnerable
+
+  - id: xbom-python-pqc-vulnerable-dsa
+    pattern: dsa.generate_private_key(...)
+    message: >
+      DSA key generation detected. DSA is broken by Shor's algorithm.
+      Migrate to ML-DSA (FIPS 204).
+    severity: WARNING
+    languages: [python]
+    metadata:
+      category: security
+      subcategory: post-quantum
+      xbom:
+        asset_type: algorithm
+        name: DSA
+        primitive: dsa
+        weakness: quantum_vulnerable
+
+  - id: xbom-python-pqc-vulnerable-ed25519
+    pattern-either:
+      - pattern: ed25519.Ed25519PrivateKey.generate()
+      - pattern: Ed25519PrivateKey.generate()
+    message: >
+      Ed25519 key generation detected. Ed25519 is broken by Shor's algorithm.
+      Migrate to ML-DSA (FIPS 204) or SLH-DSA (FIPS 205).
+    severity: WARNING
+    languages: [python]
+    metadata:
+      category: security
+      subcategory: post-quantum
+      xbom:
+        asset_type: algorithm
+        name: Ed25519
+        primitive: dsa
+        weakness: quantum_vulnerable
+
+  - id: xbom-python-pqc-vulnerable-x25519
+    pattern-either:
+      - pattern: x25519.X25519PrivateKey.generate()
+      - pattern: X25519PrivateKey.generate()
+    message: >
+      X25519 key exchange detected. X25519 is broken by Shor's algorithm.
+      Migrate to ML-KEM (FIPS 203).
+    severity: WARNING
+    languages: [python]
+    metadata:
+      category: security
+      subcategory: post-quantum
+      xbom:
+        asset_type: algorithm
+        name: X25519
+        primitive: pk
+        weakness: quantum_vulnerable
+
+  # =========================================================
+  # PQC Library Detection (Positive Signal)
+  # =========================================================
+
+  - id: xbom-python-pqc-library-oqs
+    pattern-either:
+      - pattern: import oqs
+      - pattern: oqs.KeyEncapsulation(...)
+      - pattern: oqs.Signature(...)
+    message: >
+      Post-quantum cryptography library (liboqs) detected — PQC migration in progress.
+    severity: INFO
+    languages: [python]
+    metadata:
+      category: security
+      subcategory: post-quantum
+      xbom:
+        asset_type: algorithm
+        name: ML-KEM
+        primitive: kem
+        weakness: ""
+        pqc_status: migration_in_progress
+
+  - id: xbom-python-pqc-library-pqcrypto
+    pattern: import pqcrypto
+    message: >
+      Post-quantum cryptography library (pqcrypto) detected — PQC migration in progress.
+    severity: INFO
+    languages: [python]
+    metadata:
+      category: security
+      subcategory: post-quantum
+      xbom:
+        asset_type: algorithm
+        name: PQC
+        primitive: kem
+        weakness: ""
+        pqc_status: migration_in_progress

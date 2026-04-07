@@ -1,0 +1,35 @@
+# GitHub Actions AI detection patterns
+
+# Action name/string patterns (matched case-insensitively in workflow files)
+actions:
+  - github/copilot
+  - copilot
+  - openai
+  - anthropic
+  - ai-review
+  - ai-pr-reviewer
+  - code-review-gpt
+  - gpt-review
+  - claude-review
+  - llm-review
+  - ai-commit
+  - ai-changelog
+  - huggingface
+  - langchain
+
+# Environment variable names that indicate AI usage in workflows
+env_vars:
+  - OPENAI_API_KEY
+  - ANTHROPIC_API_KEY
+  - CLAUDE_API_KEY
+  - HUGGINGFACE_TOKEN
+  - HF_TOKEN
+  - COHERE_API_KEY
+  - MISTRAL_API_KEY
+  - GOOGLE_AI_KEY
+  - GOOGLE_API_KEY
+  - REPLICATE_API_TOKEN
+  - TOGETHER_API_KEY
+  - GROQ_API_KEY
+  - DEEPSEEK_API_KEY
+  - XAI_API_KEY

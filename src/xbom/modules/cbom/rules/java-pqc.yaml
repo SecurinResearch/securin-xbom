@@ -1,0 +1,150 @@
+rules:
+  # =========================================================
+  # Quantum-Vulnerable Algorithm Detection — Java
+  # =========================================================
+
+  - id: xbom-java-pqc-vulnerable-rsa-keygen
+    pattern: KeyPairGenerator.getInstance("RSA")
+    message: >
+      RSA key generation detected. RSA is completely broken by Shor's algorithm.
+      Migrate to ML-KEM/ML-DSA via BouncyCastle PQC or liboqs-java.
+    severity: WARNING
+    languages: [java]
+    metadata:
+      category: security
+      subcategory: post-quantum
+      xbom:
+        asset_type: algorithm
+        name: RSA
+        primitive: pk
+        weakness: quantum_vulnerable
+
+  - id: xbom-java-pqc-vulnerable-ec-keygen
+    pattern-either:
+      - pattern: KeyPairGenerator.getInstance("EC")
+      - pattern: KeyPairGenerator.getInstance("ECDSA")
+      - pattern: KeyPairGenerator.getInstance("ECDH")
+    message: >
+      Elliptic curve key generation detected. All ECC is broken by Shor's algorithm.
+      Migrate to ML-DSA (FIPS 204) for signatures or ML-KEM (FIPS 203) for key exchange.
+    severity: WARNING
+    languages: [java]
+    metadata:
+      category: security
+      subcategory: post-quantum
+      xbom:
+        asset_type: algorithm
+        name: ECDSA
+        primitive: pk
+        weakness: quantum_vulnerable
+
+  - id: xbom-java-pqc-vulnerable-dh-keygen
+    pattern-either:
+      - pattern: KeyPairGenerator.getInstance("DH")
+      - pattern: KeyPairGenerator.getInstance("DiffieHellman")
+      - pattern: KeyAgreement.getInstance("DH")
+      - pattern: KeyAgreement.getInstance("ECDH")
+    message: >
+      Diffie-Hellman key exchange detected. DH/ECDH is broken by Shor's algorithm.
+      Migrate to ML-KEM (FIPS 203).
+    severity: WARNING
+    languages: [java]
+    metadata:
+      category: security
+      subcategory: post-quantum
+      xbom:
+        asset_type: algorithm
+        name: DH
+        primitive: pk
+        weakness: quantum_vulnerable
+
+  - id: xbom-java-pqc-vulnerable-dsa-keygen
+    pattern: KeyPairGenerator.getInstance("DSA")
+    message: >
+      DSA key generation detected. DSA is broken by Shor's algorithm.
+      Migrate to ML-DSA (FIPS 204).
+    severity: WARNING
+    languages: [java]
+    metadata:
+      category: security
+      subcategory: post-quantum
+      xbom:
+        asset_type: algorithm
+        name: DSA
+        primitive: dsa
+        weakness: quantum_vulnerable
+
+  - id: xbom-java-pqc-vulnerable-rsa-sign
+    pattern-either:
+      - pattern: Signature.getInstance("SHA256withRSA")
+      - pattern: Signature.getInstance("SHA384withRSA")
+      - pattern: Signature.getInstance("SHA512withRSA")
+      - pattern: Signature.getInstance("SHA1withRSA")
+    message: >
+      RSA signature detected. RSA signatures are broken by Shor's algorithm.
+      Migrate to ML-DSA (FIPS 204).
+    severity: WARNING
+    languages: [java]
+    metadata:
+      category: security
+      subcategory: post-quantum
+      xbom:
+        asset_type: algorithm
+        name: RSA
+        primitive: dsa
+        weakness: quantum_vulnerable
+
+  - id: xbom-java-pqc-vulnerable-ecdsa-sign
+    pattern-either:
+      - pattern: Signature.getInstance("SHA256withECDSA")
+      - pattern: Signature.getInstance("SHA384withECDSA")
+      - pattern: Signature.getInstance("SHA512withECDSA")
+    message: >
+      ECDSA signature detected. ECDSA is broken by Shor's algorithm.
+      Migrate to ML-DSA (FIPS 204).
+    severity: WARNING
+    languages: [java]
+    metadata:
+      category: security
+      subcategory: post-quantum
+      xbom:
+        asset_type: algorithm
+        name: ECDSA
+        primitive: dsa
+        weakness: quantum_vulnerable
+
+  # =========================================================
+  # PQC Library Detection (Positive Signal)
+  # =========================================================
+
+  - id: xbom-java-pqc-library-bcpqc
+    pattern: import org.bouncycastle.pqc.$REST;
+    message: >
+      BouncyCastle PQC library detected — PQC migration in progress.
+    severity: INFO
+    languages: [java]
+    metadata:
+      category: security
+      subcategory: post-quantum
+      xbom:
+        asset_type: algorithm
+        name: ML-KEM
+        primitive: kem
+        weakness: ""
+        pqc_status: migration_in_progress
+
+  - id: xbom-java-pqc-library-oqs
+    pattern: import org.openquantumsafe.$REST;
+    message: >
+      liboqs-java library detected — PQC migration in progress.
+    severity: INFO
+    languages: [java]
+    metadata:
+      category: security
+      subcategory: post-quantum
+      xbom:
+        asset_type: algorithm
+        name: ML-KEM
+        primitive: kem
+        weakness: ""
+        pqc_status: migration_in_progress

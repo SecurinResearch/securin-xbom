@@ -1,0 +1,23 @@
+app:
+  name: DocQA
+  version: 1.0.0
+  debug: false
+
+models:
+  default: gpt-4o
+  embedding: text-embedding-3-small
+  fallback: claude-sonnet-4-20250514
+
+vector_store:
+  provider: chromadb
+  host: localhost
+  port: 8000
+
+redis:
+  url: redis://localhost:6379
+  ttl: 3600
+
+auth:
+  algorithm: HS256
+  token_expiry: 3600
+  bcrypt_rounds: 12

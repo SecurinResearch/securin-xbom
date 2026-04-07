@@ -1,0 +1,26 @@
+{
+  "mcpServers": {
+    "knowledge-base": {
+      "command": "npx",
+      "args": ["-y", "@example/knowledge-base-server@latest"],
+      "env": {
+        "KB_HOST": "localhost",
+        "KB_PORT": "8100"
+      }
+    },
+    "browser-tools": {
+      "command": "npx",
+      "args": ["-y", "@example/browser-tools@latest"],
+      "env": {
+        "HEADLESS": "true"
+      }
+    },
+    "database-query": {
+      "command": "npx",
+      "args": ["-y", "@example/database-query-server@latest"],
+      "env": {
+        "DB_URL": "postgresql://localhost:5432/docqa"
+      }
+    }
+  }
+}

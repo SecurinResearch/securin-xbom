@@ -1,0 +1,58 @@
+# API key environment variable patterns
+# Each entry: [regex_pattern, provider_name, description]
+
+patterns:
+  - ['\bOPENAI_API_KEY\b', openai, "OpenAI API key env var reference"]
+  - ['\bANTHROPIC_API_KEY\b', anthropic, "Anthropic API key env var reference"]
+  - ['\bGOOGLE_API_KEY\b', google, "Google API key env var reference"]
+  - ['\bGOOGLE_GENAI_API_KEY\b', google, "Google GenAI API key env var reference"]
+  - ['\bGEMINI_API_KEY\b', google, "Gemini API key env var reference"]
+  - ['\bMISTRAL_API_KEY\b', mistral, "Mistral API key env var reference"]
+  - ['\bCOHERE_API_KEY\b', cohere, "Cohere API key env var reference"]
+  - ['\bGROQ_API_KEY\b', groq, "Groq API key env var reference"]
+  - ['\bTOGETHER_API_KEY\b', together, "Together AI API key env var reference"]
+  - ['\bREPLICATE_API_TOKEN\b', replicate, "Replicate API token env var reference"]
+  - ['\bFIREWORKS_API_KEY\b', fireworks, "Fireworks AI API key env var reference"]
+  - ['\bDEEPSEEK_API_KEY\b', deepseek, "DeepSeek API key env var reference"]
+  - ['\bHUGGINGFACE_API_KEY\b', huggingface, "Hugging Face API key env var reference"]
+  - ['\bHF_TOKEN\b', huggingface, "Hugging Face token env var reference"]
+  - ['\bPINECONE_API_KEY\b', pinecone, "Pinecone API key env var reference"]
+  - ['\bWEAVIATE_API_KEY\b', weaviate, "Weaviate API key env var reference"]
+  - ['\bQDRANT_API_KEY\b', qdrant, "Qdrant API key env var reference"]
+  - ['\bWANDB_API_KEY\b', wandb, "Weights & Biases API key env var reference"]
+  - ['\bLANGCHAIN_API_KEY\b', langchain, "LangChain API key env var reference"]
+  - ['\bLANGSMITH_API_KEY\b', langsmith, "LangSmith API key env var reference"]
+  - ['\bLANGFUSE_SECRET_KEY\b', langfuse, "Langfuse secret key env var reference"]
+  - ['\bLANGFUSE_PUBLIC_KEY\b', langfuse, "Langfuse public key env var reference"]
+  - ['\bAZURE_OPENAI_API_KEY\b', azure-openai, "Azure OpenAI API key env var reference"]
+  - ['\bAZURE_OPENAI_ENDPOINT\b', azure-openai, "Azure OpenAI endpoint env var reference"]
+  - ['\bAWS_BEDROCK_[A-Z_]+\b', aws-bedrock, "AWS Bedrock config env var reference"]
+  - ['\bOLLAMA_HOST\b', ollama, "Ollama host env var reference"]
+
+# Env var names to detect in .env files (compiled as alternation regex)
+env_file_keys:
+  - OPENAI_API_KEY
+  - ANTHROPIC_API_KEY
+  - GOOGLE_API_KEY
+  - GOOGLE_GENAI_API_KEY
+  - GEMINI_API_KEY
+  - MISTRAL_API_KEY
+  - COHERE_API_KEY
+  - GROQ_API_KEY
+  - TOGETHER_API_KEY
+  - REPLICATE_API_TOKEN
+  - FIREWORKS_API_KEY
+  - DEEPSEEK_API_KEY
+  - HF_TOKEN
+  - HUGGINGFACE_API_KEY
+  - PINECONE_API_KEY
+  - WEAVIATE_API_KEY
+  - QDRANT_API_KEY
+  - WANDB_API_KEY
+  - LANGCHAIN_API_KEY
+  - LANGSMITH_API_KEY
+  - LANGFUSE_SECRET_KEY
+  - LANGFUSE_PUBLIC_KEY
+  - AZURE_OPENAI_API_KEY
+  - AZURE_OPENAI_ENDPOINT
+  - OLLAMA_HOST

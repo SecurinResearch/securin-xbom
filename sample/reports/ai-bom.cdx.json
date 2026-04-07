@@ -1,0 +1,481 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:68980220-55e1-4d6b-b45e-b02c32f14655",
+  "version": 1,
+  "metadata": {
+    "tools": {
+      "components": [
+        {
+          "type": "application",
+          "name": "xbom",
+          "version": "0.1.0",
+          "description": "Unified xBOM generator"
+        },
+        {
+          "type": "application",
+          "name": "xbom-aibom",
+          "version": "0.1.0"
+        }
+      ]
+    }
+  },
+  "components": [
+    {
+      "type": "platform",
+      "name": "chromadb",
+      "properties": [
+        {
+          "name": "xbom:ai:detected",
+          "value": "true"
+        },
+        {
+          "name": "xbom:ai:category",
+          "value": "vector-store"
+        },
+        {
+          "name": "xbom:ai:scanner",
+          "value": "import-scanner"
+        },
+        {
+          "name": "xbom:ai:confidence",
+          "value": "0.95"
+        },
+        {
+          "name": "xbom:ai:source_file",
+          "value": "/Users/aviral/Work/xbom/sample/app/chat.py"
+        },
+        {
+          "name": "xbom:ai:description",
+          "value": "ChromaDB import"
+        },
+        {
+          "name": "xbom:ai:source_line",
+          "value": "5"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "tiktoken",
+      "properties": [
+        {
+          "name": "xbom:ai:detected",
+          "value": "true"
+        },
+        {
+          "name": "xbom:ai:category",
+          "value": "embedding"
+        },
+        {
+          "name": "xbom:ai:scanner",
+          "value": "import-scanner"
+        },
+        {
+          "name": "xbom:ai:confidence",
+          "value": "0.95"
+        },
+        {
+          "name": "xbom:ai:source_file",
+          "value": "/Users/aviral/Work/xbom/sample/app/chat.py"
+        },
+        {
+          "name": "xbom:ai:description",
+          "value": "tiktoken tokenizer import"
+        },
+        {
+          "name": "xbom:ai:source_line",
+          "value": "6"
+        }
+      ]
+    },
+    {
+      "type": "framework",
+      "name": "langchain",
+      "properties": [
+        {
+          "name": "xbom:ai:detected",
+          "value": "true"
+        },
+        {
+          "name": "xbom:ai:category",
+          "value": "agent-framework"
+        },
+        {
+          "name": "xbom:ai:scanner",
+          "value": "import-scanner"
+        },
+        {
+          "name": "xbom:ai:confidence",
+          "value": "0.95"
+        },
+        {
+          "name": "xbom:ai:source_file",
+          "value": "/Users/aviral/Work/xbom/sample/app/chat.py"
+        },
+        {
+          "name": "xbom:ai:description",
+          "value": "LangChain import"
+        },
+        {
+          "name": "xbom:ai:source_line",
+          "value": "8"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "openai",
+      "properties": [
+        {
+          "name": "xbom:ai:detected",
+          "value": "true"
+        },
+        {
+          "name": "xbom:ai:category",
+          "value": "llm-provider"
+        },
+        {
+          "name": "xbom:ai:scanner",
+          "value": "import-scanner"
+        },
+        {
+          "name": "xbom:ai:confidence",
+          "value": "0.95"
+        },
+        {
+          "name": "xbom:ai:source_file",
+          "value": "/Users/aviral/Work/xbom/sample/app/chat.py"
+        },
+        {
+          "name": "xbom:ai:description",
+          "value": "OpenAI Python SDK import"
+        },
+        {
+          "name": "xbom:ai:source_line",
+          "value": "9"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "guardrails-ai",
+      "properties": [
+        {
+          "name": "xbom:ai:detected",
+          "value": "true"
+        },
+        {
+          "name": "xbom:ai:category",
+          "value": "guardrail"
+        },
+        {
+          "name": "xbom:ai:scanner",
+          "value": "import-scanner"
+        },
+        {
+          "name": "xbom:ai:confidence",
+          "value": "0.95"
+        },
+        {
+          "name": "xbom:ai:source_file",
+          "value": "/Users/aviral/Work/xbom/sample/app/guardrails.py"
+        },
+        {
+          "name": "xbom:ai:description",
+          "value": "Guardrails AI import"
+        },
+        {
+          "name": "xbom:ai:source_line",
+          "value": "5"
+        }
+      ]
+    },
+    {
+      "type": "framework",
+      "name": "strands-agents",
+      "properties": [
+        {
+          "name": "xbom:ai:detected",
+          "value": "true"
+        },
+        {
+          "name": "xbom:ai:category",
+          "value": "agent-framework"
+        },
+        {
+          "name": "xbom:ai:scanner",
+          "value": "import-scanner"
+        },
+        {
+          "name": "xbom:ai:confidence",
+          "value": "0.95"
+        },
+        {
+          "name": "xbom:ai:source_file",
+          "value": "/Users/aviral/Work/xbom/sample/app/agent.py"
+        },
+        {
+          "name": "xbom:ai:description",
+          "value": "Strands Agents import"
+        },
+        {
+          "name": "xbom:ai:source_line",
+          "value": "5"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "mcp-sdk",
+      "properties": [
+        {
+          "name": "xbom:ai:detected",
+          "value": "true"
+        },
+        {
+          "name": "xbom:ai:category",
+          "value": "mcp"
+        },
+        {
+          "name": "xbom:ai:scanner",
+          "value": "import-scanner"
+        },
+        {
+          "name": "xbom:ai:confidence",
+          "value": "0.95"
+        },
+        {
+          "name": "xbom:ai:source_file",
+          "value": "/Users/aviral/Work/xbom/sample/app/agent.py"
+        },
+        {
+          "name": "xbom:ai:description",
+          "value": "MCP SDK import"
+        },
+        {
+          "name": "xbom:ai:source_line",
+          "value": "8"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "anthropic",
+      "properties": [
+        {
+          "name": "xbom:ai:detected",
+          "value": "true"
+        },
+        {
+          "name": "xbom:ai:category",
+          "value": "llm-provider"
+        },
+        {
+          "name": "xbom:ai:scanner",
+          "value": "import-scanner"
+        },
+        {
+          "name": "xbom:ai:confidence",
+          "value": "0.95"
+        },
+        {
+          "name": "xbom:ai:source_file",
+          "value": "/Users/aviral/Work/xbom/sample/app/agent.py"
+        },
+        {
+          "name": "xbom:ai:description",
+          "value": "Anthropic Python SDK import"
+        },
+        {
+          "name": "xbom:ai:source_line",
+          "value": "89"
+        }
+      ]
+    },
+    {
+      "type": "machine-learning-model",
+      "name": "openai/gpt-4o",
+      "properties": [
+        {
+          "name": "xbom:ai:detected",
+          "value": "true"
+        },
+        {
+          "name": "xbom:ai:category",
+          "value": "model-reference"
+        },
+        {
+          "name": "xbom:ai:scanner",
+          "value": "model-reference-scanner"
+        },
+        {
+          "name": "xbom:ai:confidence",
+          "value": "0.85"
+        },
+        {
+          "name": "xbom:ai:source_file",
+          "value": "/Users/aviral/Work/xbom/sample/app/models.py"
+        },
+        {
+          "name": "xbom:ai:description",
+          "value": "OpenAI GPT-4o model reference"
+        },
+        {
+          "name": "xbom:ai:source_line",
+          "value": "13"
+        }
+      ]
+    },
+    {
+      "type": "machine-learning-model",
+      "name": "openai/embedding",
+      "properties": [
+        {
+          "name": "xbom:ai:detected",
+          "value": "true"
+        },
+        {
+          "name": "xbom:ai:category",
+          "value": "model-reference"
+        },
+        {
+          "name": "xbom:ai:scanner",
+          "value": "model-reference-scanner"
+        },
+        {
+          "name": "xbom:ai:confidence",
+          "value": "0.85"
+        },
+        {
+          "name": "xbom:ai:source_file",
+          "value": "/Users/aviral/Work/xbom/sample/app/embeddings.py"
+        },
+        {
+          "name": "xbom:ai:description",
+          "value": "OpenAI embedding model reference"
+        },
+        {
+          "name": "xbom:ai:source_line",
+          "value": "9"
+        }
+      ]
+    },
+    {
+      "type": "machine-learning-model",
+      "name": "anthropic/claude",
+      "properties": [
+        {
+          "name": "xbom:ai:detected",
+          "value": "true"
+        },
+        {
+          "name": "xbom:ai:category",
+          "value": "model-reference"
+        },
+        {
+          "name": "xbom:ai:scanner",
+          "value": "model-reference-scanner"
+        },
+        {
+          "name": "xbom:ai:confidence",
+          "value": "0.85"
+        },
+        {
+          "name": "xbom:ai:source_file",
+          "value": "/Users/aviral/Work/xbom/sample/app/agent.py"
+        },
+        {
+          "name": "xbom:ai:description",
+          "value": "Anthropic Claude model reference"
+        },
+        {
+          "name": "xbom:ai:source_line",
+          "value": "95"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "openai_api_key",
+      "properties": [
+        {
+          "name": "xbom:ai:detected",
+          "value": "true"
+        },
+        {
+          "name": "xbom:ai:category",
+          "value": "config"
+        },
+        {
+          "name": "xbom:ai:scanner",
+          "value": "config-file-scanner"
+        },
+        {
+          "name": "xbom:ai:confidence",
+          "value": "0.85"
+        },
+        {
+          "name": "xbom:ai:source_file",
+          "value": "/Users/aviral/Work/xbom/sample/.env"
+        },
+        {
+          "name": "xbom:ai:description",
+          "value": "AI-related environment variable: OPENAI_API_KEY"
+        },
+        {
+          "name": "xbom:ai:source_line",
+          "value": "1"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "mcp-config",
+      "properties": [
+        {
+          "name": "xbom:ai:detected",
+          "value": "true"
+        },
+        {
+          "name": "xbom:ai:category",
+          "value": "config"
+        },
+        {
+          "name": "xbom:ai:scanner",
+          "value": "config-file-scanner"
+        },
+        {
+          "name": "xbom:ai:confidence",
+          "value": "0.95"
+        },
+        {
+          "name": "xbom:ai:source_file",
+          "value": "/Users/aviral/Work/xbom/sample/mcp.json"
+        },
+        {
+          "name": "xbom:ai:description",
+          "value": "MCP (Model Context Protocol) configuration: mcp.json"
+        },
+        {
+          "name": "xbom:ai:source_line",
+          "value": "1"
+        },
+        {
+          "name": "xbom:ai:risk_score",
+          "value": "20"
+        },
+        {
+          "name": "xbom:ai:risk_severity",
+          "value": "low"
+        },
+        {
+          "name": "xbom:ai:risk_factors",
+          "value": "mcp_unknown_server (+20)"
+        }
+      ]
+    }
+  ],
+  "services": [],
+  "dependencies": []
+}

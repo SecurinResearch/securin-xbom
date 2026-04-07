@@ -1,0 +1,26 @@
+# AI-BOM risk scoring weights and severity thresholds
+
+weights:
+  # Critical (25-30)
+  hardcoded_api_key: 30
+  hardcoded_credentials: 30
+  shadow_ai: 25
+  webhook_no_auth: 25
+  # High (15-20)
+  mcp_unknown_server: 20
+  internet_facing: 20
+  no_auth: 15
+  # Medium (10)
+  deprecated_model: 10
+  no_rate_limit: 10
+  no_error_handling: 10
+  # Low (5)
+  unpinned_model: 5
+
+# Severity thresholds (score >= threshold)
+severity_thresholds:
+  critical: 76
+  high: 51
+  medium: 26
+  low: 1
+  # score == 0 -> info

@@ -1,0 +1,384 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:a3158350-57f2-41e1-99e3-1ff9a0b78808",
+  "version": 1,
+  "metadata": {
+    "tools": {
+      "components": [
+        {
+          "type": "application",
+          "name": "xbom",
+          "version": "0.1.0",
+          "description": "Unified xBOM generator"
+        },
+        {
+          "type": "application",
+          "name": "xbom-apibom",
+          "version": "0.1.0"
+        }
+      ]
+    }
+  },
+  "components": [
+    {
+      "type": "service",
+      "name": "hooks.slack.com",
+      "description": "External API dependency: hooks.slack.com",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://hooks.slack.com/services/T00/B00/xxx"
+        }
+      ],
+      "properties": [
+        {
+          "name": "xbom:api:category",
+          "value": "external-dependency"
+        },
+        {
+          "name": "xbom:api:client_library",
+          "value": "requests"
+        },
+        {
+          "name": "xbom:api:source_file",
+          "value": "app/external.py"
+        },
+        {
+          "name": "xbom:api:source_line",
+          "value": "9"
+        },
+        {
+          "name": "xbom:api:uses_tls",
+          "value": "true"
+        }
+      ]
+    },
+    {
+      "type": "service",
+      "name": "sentry.io",
+      "description": "External API dependency: sentry.io",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://sentry.io/api/0/store/"
+        }
+      ],
+      "properties": [
+        {
+          "name": "xbom:api:category",
+          "value": "external-dependency"
+        },
+        {
+          "name": "xbom:api:client_library",
+          "value": "requests"
+        },
+        {
+          "name": "xbom:api:source_file",
+          "value": "app/external.py"
+        },
+        {
+          "name": "xbom:api:source_line",
+          "value": "15"
+        },
+        {
+          "name": "xbom:api:uses_tls",
+          "value": "true"
+        }
+      ]
+    },
+    {
+      "type": "service",
+      "name": "events.pagerduty.com",
+      "description": "External API dependency: events.pagerduty.com",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://events.pagerduty.com/v2/enqueue"
+        }
+      ],
+      "properties": [
+        {
+          "name": "xbom:api:category",
+          "value": "external-dependency"
+        },
+        {
+          "name": "xbom:api:client_library",
+          "value": "requests"
+        },
+        {
+          "name": "xbom:api:source_file",
+          "value": "app/external.py"
+        },
+        {
+          "name": "xbom:api:source_line",
+          "value": "35"
+        },
+        {
+          "name": "xbom:api:uses_tls",
+          "value": "true"
+        }
+      ]
+    },
+    {
+      "type": "service",
+      "name": "api.weatherapi.com",
+      "description": "External API dependency: api.weatherapi.com",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "http://api.weatherapi.com/v1/current.json?q={city}"
+        }
+      ],
+      "properties": [
+        {
+          "name": "xbom:api:category",
+          "value": "external-dependency"
+        },
+        {
+          "name": "xbom:api:client_library",
+          "value": "httpx"
+        },
+        {
+          "name": "xbom:api:source_file",
+          "value": "app/external.py"
+        },
+        {
+          "name": "xbom:api:source_line",
+          "value": "20"
+        },
+        {
+          "name": "xbom:api:uses_tls",
+          "value": "false"
+        },
+        {
+          "name": "xbom:api:risk_score",
+          "value": "25"
+        },
+        {
+          "name": "xbom:api:risk_severity",
+          "value": "low"
+        },
+        {
+          "name": "xbom:api:risk_factors",
+          "value": "external_api_no_tls (+25)"
+        }
+      ]
+    },
+    {
+      "type": "data",
+      "name": "docs/openapi.yaml",
+      "description": "OpenAPI specification: DocQ&A API v1.0.0",
+      "properties": [
+        {
+          "name": "xbom:api:category",
+          "value": "api-spec"
+        },
+        {
+          "name": "xbom:api:spec_version",
+          "value": "3.0.3"
+        },
+        {
+          "name": "xbom:api:spec_title",
+          "value": "DocQ&A API"
+        },
+        {
+          "name": "xbom:api:spec_api_version",
+          "value": "1.0.0"
+        },
+        {
+          "name": "xbom:api:spec_endpoint_count",
+          "value": "6"
+        },
+        {
+          "name": "xbom:api:spec_has_security",
+          "value": "true"
+        }
+      ]
+    }
+  ],
+  "services": [
+    {
+      "name": "fastapi-app",
+      "endpoints": [
+        "/chat",
+        "/documents"
+      ],
+      "properties": [
+        {
+          "name": "xbom:api:framework",
+          "value": "fastapi"
+        },
+        {
+          "name": "xbom:api:source_file",
+          "value": "app/chat.py"
+        },
+        {
+          "name": "xbom:api:endpoint_count",
+          "value": "2"
+        },
+        {
+          "name": "xbom:api:auth_coverage",
+          "value": "100%"
+        }
+      ],
+      "data": [
+        {
+          "classification": "api-definition",
+          "flow": "inbound",
+          "name": "POST /chat",
+          "description": "POST endpoint at /chat"
+        },
+        {
+          "classification": "api-definition",
+          "flow": "inbound",
+          "name": "POST /documents",
+          "description": "POST endpoint at /documents"
+        }
+      ]
+    },
+    {
+      "name": "fastapi-app",
+      "endpoints": [
+        "/dashboard",
+        "/debug/config",
+        "/password/reset",
+        "/users/{user_id}"
+      ],
+      "properties": [
+        {
+          "name": "xbom:api:framework",
+          "value": "fastapi"
+        },
+        {
+          "name": "xbom:api:source_file",
+          "value": "app/admin.py"
+        },
+        {
+          "name": "xbom:api:endpoint_count",
+          "value": "4"
+        },
+        {
+          "name": "xbom:api:auth_coverage",
+          "value": "100%"
+        },
+        {
+          "name": "xbom:api:risk_score",
+          "value": "45"
+        },
+        {
+          "name": "xbom:api:risk_severity",
+          "value": "medium"
+        },
+        {
+          "name": "xbom:api:risk_factors",
+          "value": "sensitive_data_exposure (+25), admin_endpoint_exposed (+20)"
+        }
+      ],
+      "data": [
+        {
+          "classification": "api-definition",
+          "flow": "inbound",
+          "name": "GET /dashboard",
+          "description": "GET endpoint at /dashboard"
+        },
+        {
+          "classification": "api-definition",
+          "flow": "inbound",
+          "name": "GET /debug/config",
+          "description": "GET endpoint at /debug/config"
+        },
+        {
+          "classification": "api-definition",
+          "flow": "inbound",
+          "name": "DELETE /users/{user_id}",
+          "description": "DELETE endpoint at /users/{user_id}"
+        },
+        {
+          "classification": "api-definition",
+          "flow": "inbound",
+          "name": "POST /password/reset",
+          "description": "POST endpoint at /password/reset"
+        }
+      ]
+    },
+    {
+      "name": "fastapi-app",
+      "endpoints": [
+        "/api/v1/models",
+        "/health"
+      ],
+      "properties": [
+        {
+          "name": "xbom:api:framework",
+          "value": "fastapi"
+        },
+        {
+          "name": "xbom:api:source_file",
+          "value": "app/main.py"
+        },
+        {
+          "name": "xbom:api:endpoint_count",
+          "value": "2"
+        },
+        {
+          "name": "xbom:api:auth_coverage",
+          "value": "0%"
+        },
+        {
+          "name": "xbom:api:risk_score",
+          "value": "30"
+        },
+        {
+          "name": "xbom:api:risk_severity",
+          "value": "medium"
+        },
+        {
+          "name": "xbom:api:risk_factors",
+          "value": "no_authentication (+30)"
+        }
+      ],
+      "data": [
+        {
+          "classification": "api-definition",
+          "flow": "inbound",
+          "name": "GET /health",
+          "description": "GET endpoint at /health"
+        },
+        {
+          "classification": "api-definition",
+          "flow": "inbound",
+          "name": "GET /api/v1/models",
+          "description": "GET endpoint at /api/v1/models"
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "properties": [
+    {
+      "name": "xbom:api:total_endpoints",
+      "value": "18"
+    },
+    {
+      "name": "xbom:api:internal_count",
+      "value": "14"
+    },
+    {
+      "name": "xbom:api:external_count",
+      "value": "4"
+    },
+    {
+      "name": "xbom:api:spec_count",
+      "value": "1"
+    },
+    {
+      "name": "xbom:api:framework_list",
+      "value": "fastapi"
+    },
+    {
+      "name": "xbom:api:auth_coverage_pct",
+      "value": "75"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+# OpenAPI/Swagger spec file detection and parsing configuration
+
+spec_filenames:
+  - openapi.yaml
+  - openapi.yml
+  - openapi.json
+  - swagger.yaml
+  - swagger.yml
+  - swagger.json
+  - api-spec.yaml
+  - api-spec.yml
+  - api-spec.json
+  - api.yaml
+  - api.yml
+  - api.json
+
+# Also search within these directories
+spec_dirs:
+  - docs
+  - api
+  - spec
+  - specs
+  - swagger
+  - openapi
+
+# HTTP methods to extract from spec paths
+http_methods:
+  - get
+  - post
+  - put
+  - delete
+  - patch
+  - options
+  - head

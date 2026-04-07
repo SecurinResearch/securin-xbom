@@ -1,0 +1,24 @@
+# Cloud AI resource patterns (Terraform / CloudFormation)
+# [regex, name, description]
+
+resources:
+  # AWS Bedrock
+  - ['aws_bedrockagent_agent', bedrock-agent, "AWS Bedrock Agent"]
+  - ['aws_bedrockagent_knowledge_base', bedrock-kb, "AWS Bedrock Knowledge Base"]
+  - ['aws_bedrock_custom_model', bedrock-model, "AWS Bedrock Custom Model"]
+  - ['aws_bedrockagent_flow', bedrock-flow, "AWS Bedrock Agent Flow"]
+  - ['AWS::Bedrock::', bedrock, "AWS Bedrock CloudFormation resource"]
+  # AWS SageMaker
+  - ['aws_sagemaker_endpoint', sagemaker-endpoint, "AWS SageMaker Endpoint"]
+  - ['aws_sagemaker_model', sagemaker-model, "AWS SageMaker Model"]
+  - ['aws_sagemaker_notebook', sagemaker-notebook, "AWS SageMaker Notebook"]
+  - ['AWS::SageMaker::', sagemaker, "AWS SageMaker CloudFormation resource"]
+  # Google Vertex AI
+  - ['google_vertex_ai_endpoint', vertex-endpoint, "Vertex AI Endpoint"]
+  - ['google_vertex_ai_featurestore', vertex-featurestore, "Vertex AI Feature Store"]
+  - ['google_vertex_ai_index', vertex-index, "Vertex AI Vector Index"]
+  # Azure
+  - ['azurerm_cognitive_account', azure-cognitive, "Azure Cognitive Services"]
+  - ['azurerm_cognitive_deployment', azure-openai-deployment, "Azure OpenAI Deployment"]
+  - ['azurerm_ai_services', azure-ai, "Azure AI Services"]
+  - ['azurerm_machine_learning_', azure-ml, "Azure Machine Learning"]

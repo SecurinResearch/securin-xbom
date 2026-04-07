@@ -1,0 +1,195 @@
+rules:
+  # =========================================================
+  # Crypto Inventory — Python
+  # Detects ALL cryptographic usage for CBOM inventory.
+  # Strong crypto has no weakness flag; weak crypto is already
+  # caught by python-crypto.yaml with weakness flags.
+  # =========================================================
+
+  # --- Hash Algorithms (strong) ---
+  - id: xbom-python-hash-sha256
+    pattern-either:
+      - pattern: hashlib.sha256(...)
+      - pattern: hashlib.new("sha256", ...)
+    message: SHA-256 hash usage
+    severity: INFO
+    languages: [python]
+    metadata:
+      category: security
+      subcategory: cryptography
+      xbom:
+        asset_type: algorithm
+        name: SHA-256
+        primitive: hash
+        parameter_set: "256"
+        weakness: ""
+
+  - id: xbom-python-hash-sha384
+    pattern-either:
+      - pattern: hashlib.sha384(...)
+      - pattern: hashlib.new("sha384", ...)
+    message: SHA-384 hash usage
+    severity: INFO
+    languages: [python]
+    metadata:
+      category: security
+      subcategory: cryptography
+      xbom:
+        asset_type: algorithm
+        name: SHA-384
+        primitive: hash
+        parameter_set: "384"
+        weakness: ""
+
+  - id: xbom-python-hash-sha512
+    pattern-either:
+      - pattern: hashlib.sha512(...)
+      - pattern: hashlib.new("sha512", ...)
+    message: SHA-512 hash usage
+    severity: INFO
+    languages: [python]
+    metadata:
+      category: security
+      subcategory: cryptography
+      xbom:
+        asset_type: algorithm
+        name: SHA-512
+        primitive: hash
+        parameter_set: "512"
+        weakness: ""
+
+  # --- HMAC ---
+  - id: xbom-python-hmac
+    pattern-either:
+      - pattern: hmac.new(...)
+      - pattern: hmac.HMAC(...)
+    message: HMAC usage
+    severity: INFO
+    languages: [python]
+    metadata:
+      category: security
+      subcategory: cryptography
+      xbom:
+        asset_type: algorithm
+        name: HMAC
+        primitive: mac
+        weakness: ""
+
+  # --- Symmetric Encryption (strong) ---
+  - id: xbom-python-fernet
+    pattern-either:
+      - pattern: Fernet(...)
+      - pattern: Fernet.generate_key()
+    message: Fernet (AES-128-CBC) symmetric encryption
+    severity: INFO
+    languages: [python]
+    metadata:
+      category: security
+      subcategory: cryptography
+      xbom:
+        asset_type: algorithm
+        name: AES-128
+        primitive: ae
+        parameter_set: "128"
+        weakness: ""
+
+  - id: xbom-python-aes-strong
+    pattern-either:
+      - pattern: AES.new(...)
+      - pattern: AESGCM(...)
+      - pattern: AESCCM(...)
+    message: AES encryption usage
+    severity: INFO
+    languages: [python]
+    metadata:
+      category: security
+      subcategory: cryptography
+      xbom:
+        asset_type: algorithm
+        name: AES
+        primitive: ae
+        weakness: ""
+
+  # --- Password Hashing ---
+  - id: xbom-python-bcrypt
+    pattern-either:
+      - pattern: bcrypt.hashpw(...)
+      - pattern: bcrypt.checkpw(...)
+      - pattern: bcrypt.gensalt(...)
+    message: bcrypt password hashing
+    severity: INFO
+    languages: [python]
+    metadata:
+      category: security
+      subcategory: cryptography
+      xbom:
+        asset_type: algorithm
+        name: bcrypt
+        primitive: kdf
+        weakness: ""
+
+  - id: xbom-python-scrypt
+    pattern-either:
+      - pattern: hashlib.scrypt(...)
+      - pattern: Scrypt(...)
+    message: scrypt key derivation
+    severity: INFO
+    languages: [python]
+    metadata:
+      category: security
+      subcategory: cryptography
+      xbom:
+        asset_type: algorithm
+        name: scrypt
+        primitive: kdf
+        weakness: ""
+
+  - id: xbom-python-pbkdf2
+    pattern-either:
+      - pattern: hashlib.pbkdf2_hmac(...)
+      - pattern: PBKDF2HMAC(...)
+    message: PBKDF2 key derivation
+    severity: INFO
+    languages: [python]
+    metadata:
+      category: security
+      subcategory: cryptography
+      xbom:
+        asset_type: algorithm
+        name: PBKDF2
+        primitive: kdf
+        weakness: ""
+
+  # --- JWT ---
+  - id: xbom-python-jwt-encode
+    pattern-either:
+      - pattern: jwt.encode(...)
+      - pattern: jwt.decode(...)
+    message: JWT token signing/verification
+    severity: INFO
+    languages: [python]
+    metadata:
+      category: security
+      subcategory: cryptography
+      xbom:
+        asset_type: algorithm
+        name: HMAC
+        primitive: mac
+        weakness: ""
+
+  # --- Secure Random ---
+  - id: xbom-python-secrets
+    pattern-either:
+      - pattern: secrets.token_bytes(...)
+      - pattern: secrets.token_hex(...)
+      - pattern: secrets.token_urlsafe(...)
+    message: Cryptographically secure random generation
+    severity: INFO
+    languages: [python]
+    metadata:
+      category: security
+      subcategory: cryptography
+      xbom:
+        asset_type: related-crypto-material
+        name: CSPRNG
+        weakness: ""

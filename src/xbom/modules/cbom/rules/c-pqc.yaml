@@ -1,0 +1,148 @@
+rules:
+  # =========================================================
+  # Quantum-Vulnerable Algorithm Detection — C/C++
+  # =========================================================
+
+  - id: xbom-c-pqc-vulnerable-rsa-keygen
+    pattern-either:
+      - pattern: RSA_generate_key_ex(...)
+      - pattern: RSA_generate_key(...)
+      - pattern: EVP_PKEY_CTX_set_rsa_keygen_bits(...)
+    message: >
+      RSA key generation detected. RSA is completely broken by Shor's algorithm.
+      Migrate to liboqs ML-KEM/ML-DSA.
+    severity: WARNING
+    languages: [c, cpp]
+    metadata:
+      category: security
+      subcategory: post-quantum
+      xbom:
+        asset_type: algorithm
+        name: RSA
+        primitive: pk
+        weakness: quantum_vulnerable
+
+  - id: xbom-c-pqc-vulnerable-ec-keygen
+    pattern-either:
+      - pattern: EC_KEY_generate_key(...)
+      - pattern: EC_KEY_new_by_curve_name(...)
+    message: >
+      Elliptic curve key generation detected. All ECC is broken by Shor's algorithm.
+      Migrate to liboqs ML-DSA/ML-KEM.
+    severity: WARNING
+    languages: [c, cpp]
+    metadata:
+      category: security
+      subcategory: post-quantum
+      xbom:
+        asset_type: algorithm
+        name: ECDSA
+        primitive: pk
+        weakness: quantum_vulnerable
+
+  - id: xbom-c-pqc-vulnerable-dh-keygen
+    pattern-either:
+      - pattern: DH_generate_parameters_ex(...)
+      - pattern: DH_generate_key(...)
+    message: >
+      Diffie-Hellman key generation detected. DH is broken by Shor's algorithm.
+      Migrate to liboqs ML-KEM.
+    severity: WARNING
+    languages: [c, cpp]
+    metadata:
+      category: security
+      subcategory: post-quantum
+      xbom:
+        asset_type: algorithm
+        name: DH
+        primitive: pk
+        weakness: quantum_vulnerable
+
+  - id: xbom-c-pqc-vulnerable-dsa-keygen
+    pattern-either:
+      - pattern: DSA_generate_parameters_ex(...)
+      - pattern: DSA_generate_key(...)
+    message: >
+      DSA key generation detected. DSA is broken by Shor's algorithm.
+    severity: WARNING
+    languages: [c, cpp]
+    metadata:
+      category: security
+      subcategory: post-quantum
+      xbom:
+        asset_type: algorithm
+        name: DSA
+        primitive: dsa
+        weakness: quantum_vulnerable
+
+  - id: xbom-c-pqc-vulnerable-evp-rsa
+    pattern: EVP_PKEY_CTX_new_id(EVP_PKEY_RSA, ...)
+    message: >
+      EVP RSA context creation detected. RSA is broken by Shor's algorithm.
+    severity: WARNING
+    languages: [c, cpp]
+    metadata:
+      category: security
+      subcategory: post-quantum
+      xbom:
+        asset_type: algorithm
+        name: RSA
+        primitive: pk
+        weakness: quantum_vulnerable
+
+  - id: xbom-c-pqc-vulnerable-evp-ec
+    pattern: EVP_PKEY_CTX_new_id(EVP_PKEY_EC, ...)
+    message: >
+      EVP EC context creation detected. ECC is broken by Shor's algorithm.
+    severity: WARNING
+    languages: [c, cpp]
+    metadata:
+      category: security
+      subcategory: post-quantum
+      xbom:
+        asset_type: algorithm
+        name: ECDSA
+        primitive: pk
+        weakness: quantum_vulnerable
+
+  # =========================================================
+  # PQC Library Detection (Positive Signal)
+  # =========================================================
+
+  - id: xbom-c-pqc-library-oqs
+    pattern-either:
+      - pattern: OQS_KEM_new(...)
+      - pattern: OQS_SIG_new(...)
+    message: >
+      liboqs PQC library detected — PQC migration in progress.
+    severity: INFO
+    languages: [c, cpp]
+    metadata:
+      category: security
+      subcategory: post-quantum
+      xbom:
+        asset_type: algorithm
+        name: ML-KEM
+        primitive: kem
+        weakness: ""
+        pqc_status: migration_in_progress
+
+  - id: xbom-c-pqc-library-oqs-include
+    pattern-either:
+      - pattern: |
+          #include <oqs/oqs.h>
+      - pattern: |
+          #include "oqs/oqs.h"
+    message: >
+      liboqs header included — PQC migration in progress.
+    severity: INFO
+    languages: [c, cpp]
+    metadata:
+      category: security
+      subcategory: post-quantum
+      xbom:
+        asset_type: algorithm
+        name: ML-KEM
+        primitive: kem
+        weakness: ""
+        pqc_status: migration_in_progress

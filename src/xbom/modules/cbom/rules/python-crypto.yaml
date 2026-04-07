@@ -1,0 +1,188 @@
+rules:
+  # --- Weak Hash Algorithms ---
+  - id: xbom-python-weak-hash-md5
+    pattern-either:
+      - pattern: hashlib.md5(...)
+      - pattern: hashlib.new("md5", ...)
+      - pattern: hashlib.new("MD5", ...)
+    message: Use of weak MD5 hash algorithm
+    severity: WARNING
+    languages: [python]
+    metadata:
+      category: security
+      subcategory: cryptography
+      xbom:
+        asset_type: algorithm
+        name: MD5
+        primitive: hash
+        parameter_set: "128"
+        weakness: weak_algorithm
+
+  - id: xbom-python-weak-hash-sha1
+    pattern-either:
+      - pattern: hashlib.sha1(...)
+      - pattern: hashlib.new("sha1", ...)
+      - pattern: hashlib.new("SHA1", ...)
+    message: Use of weak SHA-1 hash algorithm
+    severity: WARNING
+    languages: [python]
+    metadata:
+      category: security
+      subcategory: cryptography
+      xbom:
+        asset_type: algorithm
+        name: SHA-1
+        primitive: hash
+        parameter_set: "160"
+        weakness: weak_algorithm
+
+  # --- Weak Symmetric Ciphers ---
+  - id: xbom-python-weak-cipher-des
+    pattern-either:
+      - pattern: DES.new(...)
+      - pattern: DES3.new(...)
+    message: Use of weak DES/3DES cipher
+    severity: WARNING
+    languages: [python]
+    metadata:
+      category: security
+      subcategory: cryptography
+      xbom:
+        asset_type: algorithm
+        name: DES
+        primitive: block-cipher
+        parameter_set: "56"
+        weakness: weak_algorithm
+
+  - id: xbom-python-weak-cipher-rc4
+    pattern: ARC4.new(...)
+    message: Use of weak RC4 stream cipher
+    severity: WARNING
+    languages: [python]
+    metadata:
+      category: security
+      subcategory: cryptography
+      xbom:
+        asset_type: algorithm
+        name: RC4
+        primitive: stream-cipher
+        weakness: weak_algorithm
+
+  - id: xbom-python-weak-cipher-blowfish
+    pattern: Blowfish.new(...)
+    message: Use of weak Blowfish cipher
+    severity: WARNING
+    languages: [python]
+    metadata:
+      category: security
+      subcategory: cryptography
+      xbom:
+        asset_type: algorithm
+        name: Blowfish
+        primitive: block-cipher
+        weakness: weak_algorithm
+
+  # --- Insecure TLS/SSL ---
+  - id: xbom-python-insecure-ssl-protocol
+    pattern-either:
+      - pattern: ssl.PROTOCOL_SSLv2
+      - pattern: ssl.PROTOCOL_SSLv3
+      - pattern: ssl.PROTOCOL_SSLv23
+      - pattern: ssl.PROTOCOL_TLSv1
+      - pattern: ssl.PROTOCOL_TLSv1_1
+    message: Use of deprecated SSL/TLS protocol version
+    severity: ERROR
+    languages: [python]
+    metadata:
+      category: security
+      subcategory: cryptography
+      xbom:
+        asset_type: protocol
+        name: TLS
+        weakness: deprecated_protocol
+
+  - id: xbom-python-ssl-no-verify
+    pattern-either:
+      - pattern: ssl._create_unverified_context(...)
+      - pattern: ssl.create_default_context().check_hostname = False
+      - pattern: $CTX.verify_mode = ssl.CERT_NONE
+    message: SSL certificate verification disabled
+    severity: ERROR
+    languages: [python]
+    metadata:
+      category: security
+      subcategory: cryptography
+      xbom:
+        asset_type: protocol
+        name: TLS
+        weakness: deprecated_protocol
+
+  - id: xbom-python-requests-no-verify
+    pattern: requests.$METHOD(..., verify=False, ...)
+    message: HTTPS verification disabled in requests call
+    severity: WARNING
+    languages: [python]
+    metadata:
+      category: security
+      subcategory: cryptography
+      xbom:
+        asset_type: protocol
+        name: TLS
+        weakness: deprecated_protocol
+
+  # --- Small Key Sizes ---
+  - id: xbom-python-small-rsa-key
+    patterns:
+      - pattern: rsa.generate_private_key(..., key_size=$SIZE, ...)
+      - metavariable-comparison:
+          metavariable: $SIZE
+          comparison: $SIZE < 2048
+    message: RSA key size less than 2048 bits
+    severity: WARNING
+    languages: [python]
+    metadata:
+      category: security
+      subcategory: cryptography
+      xbom:
+        asset_type: algorithm
+        name: RSA
+        primitive: pk
+        weakness: small_key_size
+
+  - id: xbom-python-small-rsa-key-pycryptodome
+    patterns:
+      - pattern: RSA.generate($SIZE, ...)
+      - metavariable-comparison:
+          metavariable: $SIZE
+          comparison: $SIZE < 2048
+    message: RSA key size less than 2048 bits
+    severity: WARNING
+    languages: [python]
+    metadata:
+      category: security
+      subcategory: cryptography
+      xbom:
+        asset_type: algorithm
+        name: RSA
+        primitive: pk
+        weakness: small_key_size
+
+  # --- Insecure Random ---
+  - id: xbom-python-insecure-random
+    pattern-either:
+      - pattern: random.randint(...)
+      - pattern: random.random()
+      - pattern: random.choice(...)
+      - pattern: random.getrandbits(...)
+    message: >
+      Use of non-cryptographic random number generator.
+      Use secrets or os.urandom() for security-sensitive values.
+    severity: INFO
+    languages: [python]
+    metadata:
+      category: security
+      subcategory: cryptography
+      xbom:
+        asset_type: related-crypto-material
+        name: PRNG
+        weakness: weak_algorithm

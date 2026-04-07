@@ -1,0 +1,114 @@
+rules:
+  # =========================================================
+  # Crypto Inventory — Java
+  # Detects ALL cryptographic usage for CBOM inventory.
+  # =========================================================
+
+  - id: xbom-java-hash-sha256
+    pattern: MessageDigest.getInstance("SHA-256")
+    message: SHA-256 hash usage
+    severity: INFO
+    languages: [java]
+    metadata:
+      category: security
+      subcategory: cryptography
+      xbom:
+        asset_type: algorithm
+        name: SHA-256
+        primitive: hash
+        parameter_set: "256"
+        weakness: ""
+
+  - id: xbom-java-hash-sha384
+    pattern: MessageDigest.getInstance("SHA-384")
+    message: SHA-384 hash usage
+    severity: INFO
+    languages: [java]
+    metadata:
+      category: security
+      subcategory: cryptography
+      xbom:
+        asset_type: algorithm
+        name: SHA-384
+        primitive: hash
+        parameter_set: "384"
+        weakness: ""
+
+  - id: xbom-java-hash-sha512
+    pattern: MessageDigest.getInstance("SHA-512")
+    message: SHA-512 hash usage
+    severity: INFO
+    languages: [java]
+    metadata:
+      category: security
+      subcategory: cryptography
+      xbom:
+        asset_type: algorithm
+        name: SHA-512
+        primitive: hash
+        parameter_set: "512"
+        weakness: ""
+
+  - id: xbom-java-aes
+    pattern-either:
+      - pattern: Cipher.getInstance("AES")
+      - pattern: Cipher.getInstance("AES/...")
+      - pattern: Cipher.getInstance("AES/GCM/...")
+      - pattern: Cipher.getInstance("AES/CBC/...")
+    message: AES encryption usage
+    severity: INFO
+    languages: [java]
+    metadata:
+      category: security
+      subcategory: cryptography
+      xbom:
+        asset_type: algorithm
+        name: AES
+        primitive: ae
+        weakness: ""
+
+  - id: xbom-java-hmac
+    pattern-either:
+      - pattern: Mac.getInstance("HmacSHA256")
+      - pattern: Mac.getInstance("HmacSHA384")
+      - pattern: Mac.getInstance("HmacSHA512")
+    message: HMAC usage
+    severity: INFO
+    languages: [java]
+    metadata:
+      category: security
+      subcategory: cryptography
+      xbom:
+        asset_type: algorithm
+        name: HMAC
+        primitive: mac
+        weakness: ""
+
+  - id: xbom-java-securerandom
+    pattern: new SecureRandom(...)
+    message: Cryptographically secure random generation
+    severity: INFO
+    languages: [java]
+    metadata:
+      category: security
+      subcategory: cryptography
+      xbom:
+        asset_type: related-crypto-material
+        name: CSPRNG
+        weakness: ""
+
+  - id: xbom-java-tls-secure
+    pattern-either:
+      - pattern: SSLContext.getInstance("TLSv1.2")
+      - pattern: SSLContext.getInstance("TLSv1.3")
+      - pattern: SSLContext.getInstance("TLS")
+    message: TLS context creation
+    severity: INFO
+    languages: [java]
+    metadata:
+      category: security
+      subcategory: cryptography
+      xbom:
+        asset_type: protocol
+        name: TLS
+        weakness: ""

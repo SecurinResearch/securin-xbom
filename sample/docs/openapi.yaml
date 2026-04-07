@@ -1,0 +1,92 @@
+openapi: "3.0.3"
+info:
+  title: DocQ&A API
+  version: "1.0.0"
+  description: AI-powered document Q&A service
+servers:
+  - url: https://api.docqa.example.com/api/v1
+paths:
+  /health:
+    get:
+      summary: Health check
+      responses:
+        "200":
+          description: Service health status
+  /api/v1/chat:
+    post:
+      summary: Ask a question
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [question]
+              properties:
+                question:
+                  type: string
+                model:
+                  type: string
+                  default: gpt-4o
+                temperature:
+                  type: number
+                  default: 0.7
+      responses:
+        "200":
+          description: Answer with sources
+  /api/v1/documents:
+    post:
+      summary: Upload a document
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [filename, content]
+              properties:
+                filename:
+                  type: string
+                content:
+                  type: string
+      responses:
+        "200":
+          description: Document indexed
+  /api/v1/models:
+    get:
+      summary: List available models
+      responses:
+        "200":
+          description: Model list
+  /admin/dashboard:
+    get:
+      summary: Admin dashboard
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: System stats
+  /admin/users/{user_id}:
+    delete:
+      summary: Delete user
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: User deleted
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

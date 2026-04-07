@@ -1,0 +1,156 @@
+rules:
+  # --- Weak Hash Algorithms ---
+  - id: xbom-java-weak-hash-md5
+    pattern: MessageDigest.getInstance("MD5")
+    message: Use of weak MD5 hash algorithm
+    severity: WARNING
+    languages: [java]
+    metadata:
+      category: security
+      subcategory: cryptography
+      xbom:
+        asset_type: algorithm
+        name: MD5
+        primitive: hash
+        parameter_set: "128"
+        weakness: weak_algorithm
+
+  - id: xbom-java-weak-hash-sha1
+    pattern: MessageDigest.getInstance("SHA-1")
+    message: Use of weak SHA-1 hash algorithm
+    severity: WARNING
+    languages: [java]
+    metadata:
+      category: security
+      subcategory: cryptography
+      xbom:
+        asset_type: algorithm
+        name: SHA-1
+        primitive: hash
+        parameter_set: "160"
+        weakness: weak_algorithm
+
+  # --- Weak Symmetric Ciphers ---
+  - id: xbom-java-weak-cipher-des
+    pattern-either:
+      - pattern: Cipher.getInstance("DES")
+      - pattern: Cipher.getInstance("DES/...")
+      - pattern: Cipher.getInstance("DESede")
+      - pattern: Cipher.getInstance("DESede/...")
+    message: Use of weak DES/3DES cipher
+    severity: WARNING
+    languages: [java]
+    metadata:
+      category: security
+      subcategory: cryptography
+      xbom:
+        asset_type: algorithm
+        name: DES
+        primitive: block-cipher
+        parameter_set: "56"
+        weakness: weak_algorithm
+
+  - id: xbom-java-weak-cipher-rc4
+    pattern-either:
+      - pattern: Cipher.getInstance("RC4")
+      - pattern: Cipher.getInstance("ARCFOUR")
+    message: Use of weak RC4 stream cipher
+    severity: WARNING
+    languages: [java]
+    metadata:
+      category: security
+      subcategory: cryptography
+      xbom:
+        asset_type: algorithm
+        name: RC4
+        primitive: stream-cipher
+        weakness: weak_algorithm
+
+  - id: xbom-java-ecb-mode
+    pattern: Cipher.getInstance("AES/ECB/...")
+    message: Use of AES in insecure ECB mode
+    severity: WARNING
+    languages: [java]
+    metadata:
+      category: security
+      subcategory: cryptography
+      xbom:
+        asset_type: algorithm
+        name: AES-ECB
+        primitive: block-cipher
+        weakness: weak_algorithm
+
+  # --- Insecure TLS/SSL ---
+  - id: xbom-java-insecure-ssl-protocol
+    pattern-either:
+      - pattern: SSLContext.getInstance("SSL")
+      - pattern: SSLContext.getInstance("SSLv2")
+      - pattern: SSLContext.getInstance("SSLv3")
+      - pattern: SSLContext.getInstance("TLSv1")
+      - pattern: SSLContext.getInstance("TLSv1.1")
+    message: Use of deprecated SSL/TLS protocol version
+    severity: ERROR
+    languages: [java]
+    metadata:
+      category: security
+      subcategory: cryptography
+      xbom:
+        asset_type: protocol
+        name: TLS
+        weakness: deprecated_protocol
+
+  - id: xbom-java-trust-all-certs
+    pattern: |
+      new X509TrustManager() {
+        ...
+        public void checkServerTrusted(...) { }
+        ...
+      }
+    message: Trust manager accepts all certificates
+    severity: ERROR
+    languages: [java]
+    metadata:
+      category: security
+      subcategory: cryptography
+      xbom:
+        asset_type: protocol
+        name: TLS
+        weakness: deprecated_protocol
+
+  # --- Small Key Sizes ---
+  - id: xbom-java-small-rsa-key
+    patterns:
+      - pattern: |
+          $KPG = KeyPairGenerator.getInstance("RSA");
+          ...
+          $KPG.initialize($SIZE);
+      - metavariable-comparison:
+          metavariable: $SIZE
+          comparison: $SIZE < 2048
+    message: RSA key size less than 2048 bits
+    severity: WARNING
+    languages: [java]
+    metadata:
+      category: security
+      subcategory: cryptography
+      xbom:
+        asset_type: algorithm
+        name: RSA
+        primitive: pk
+        weakness: small_key_size
+
+  # --- Insecure Random ---
+  - id: xbom-java-insecure-random
+    pattern: new Random(...)
+    message: >
+      Use of non-cryptographic Random class.
+      Use SecureRandom for security-sensitive values.
+    severity: INFO
+    languages: [java]
+    metadata:
+      category: security
+      subcategory: cryptography
+      xbom:
+        asset_type: related-crypto-material
+        name: PRNG
+        weakness: weak_algorithm

@@ -1,0 +1,87 @@
+# Framework route patterns — per language, per framework
+# Format: detect (import patterns), routes (extraction regexes), auth_indicators
+
+python:
+  fastapi:
+    detect:
+      - '(?:from|import)\s+fastapi\b'
+    routes:
+      - pattern: '@(?:app|router)\.(get|post|put|delete|patch|options|head)\s*\(\s*["\''](.*?)["\'']\s*'
+        method_group: 1
+        path_group: 2
+      - pattern: '@(?:app|router)\.api_route\s*\(\s*["\''](.*?)["\'']\s*.*?methods\s*=\s*\[(.*?)\]'
+        path_group: 1
+        method_group: 2
+    router_prefix:
+      - 'APIRouter\s*\(\s*prefix\s*=\s*["\''](.*?)["\'']\s*'
+    auth_indicators:
+      - 'Depends\s*\(\s*(?:get_current_user|oauth2_scheme|verify_token|check_auth|auth_required)'
+      - 'Security\s*\('
+      - 'HTTPBearer\s*\('
+      - 'HTTPBasic\s*\('
+    websocket:
+      - '@(?:app|router)\.websocket\s*\(\s*["\''](.*?)["\'']\s*'
+
+  flask:
+    detect:
+      - '(?:from|import)\s+flask\b'
+    routes:
+      - pattern: '@(?:app|bp|\w+)\.route\s*\(\s*["\''](.*?)["\'']\s*(?:,\s*methods\s*=\s*\[(.*?)\])?'
+        path_group: 1
+        method_group: 2
+        default_method: GET
+      - pattern: '@(?:app|bp|\w+)\.(get|post|put|delete|patch)\s*\(\s*["\''](.*?)["\'']\s*'
+        method_group: 1
+        path_group: 2
+    router_prefix:
+      - 'Blueprint\s*\(\s*["\'']\w+["\''],\s*\w+\s*(?:,\s*url_prefix\s*=\s*["\''](.*?)["\'']\s*)?'
+    auth_indicators:
+      - 'login_required'
+      - 'jwt_required'
+      - 'auth_required'
+      - 'token_required'
+      - '@requires_auth'
+
+  django:
+    detect:
+      - '(?:from|import)\s+(?:django|rest_framework)\b'
+    routes:
+      - pattern: 'path\s*\(\s*["\''](.*?)["\'']'
+        path_group: 1
+        method_group: null
+        default_method: '*'
+      - pattern: 're_path\s*\(\s*[rR]?["\''](.*?)["\'']'
+        path_group: 1
+        method_group: null
+        default_method: '*'
+      - pattern: '@api_view\s*\(\s*\[(.*?)\]\s*\)'
+        method_group: 1
+        path_group: null
+    auth_indicators:
+      - 'IsAuthenticated'
+      - 'IsAdminUser'
+      - 'permission_classes'
+      - 'authentication_classes'
+      - 'login_required'
+
+javascript:
+  express:
+    detect:
+      - "require\\s*\\(\\s*['\"]express['\"]\\s*\\)"
+      - "import\\s+express\\s+from"
+      - "import\\s+\\{.*Router.*\\}\\s+from\\s+['\"]express['\"]"
+    routes:
+      - pattern: '(?:app|router)\.(get|post|put|delete|patch|all|options|head)\s*\(\s*["\''`](.*?)["\''`]\s*'
+        method_group: 1
+        path_group: 2
+    router_prefix:
+      - 'app\.use\s*\(\s*["\''`](.*?)["\''`]\s*,\s*\w+'
+    auth_indicators:
+      - 'passport\.authenticate'
+      - 'authMiddleware'
+      - 'requireAuth'
+      - 'isAuthenticated'
+      - 'verifyToken'
+      - 'jwt\s*\('
+    websocket:
+      - '\.ws\s*\(\s*["\''`](.*?)["\''`]\s*'
