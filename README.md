@@ -15,6 +15,21 @@ xBOM scans a codebase and produces four Bills of Materials covering software pac
 - **Rules-driven** — All detection patterns live in YAML files; add new patterns without changing Python code
 - **Git provider support** — Scan local paths, GitHub, GitLab, or Bitbucket repos directly
 
+## Supported Languages & Ecosystems
+
+| Capability | Python | JavaScript/TypeScript | Java | Go | C/C++ |
+|-----------|--------|----------------------|------|-----|-------|
+| **SBOM** (cdxgen/trivy) | ✅ | ✅ | ✅ | ✅ | ✅ |
+| **AI-BOM** import detection | ✅ | ✅ | ✅ | ✅ | — |
+| **AI-BOM** package catalog | pypi | npm | maven | go modules | — |
+| **CBOM** crypto scanning (Semgrep) | ✅ | ✅ | ✅ | ✅ | ✅ |
+| **CBOM** PQC annotation | ✅ | ✅ | ✅ | ✅ | ✅ |
+| **API-BOM** framework extraction | FastAPI, Flask, Django | Express | — | — | — |
+| **API-BOM** client detection | requests, httpx, aiohttp, urllib | axios, fetch, node-fetch | — | — | — |
+| **API-BOM** OpenAPI spec parsing | ✅ (language-agnostic) | ✅ | ✅ | ✅ | ✅ |
+
+**Also scans:** Dockerfiles, docker-compose, `.env` files, Jupyter notebooks, GitHub Actions workflows, Terraform/CloudFormation configs, MCP config files, model files (`.onnx`, `.safetensors`, `.gguf`, `.pt`), and live TLS endpoints via testssl.sh.
+
 ## Quick Start
 
 ```bash
@@ -36,7 +51,7 @@ xbom doctor                   # check what's installed
 ### Step 1: Python Environment
 
 ```bash
-git clone https://github.com/your-org/xbom.git
+git clone https://github.com/SecurinResearch/securin-xbom.git
 cd xbom
 python3 -m venv .venv
 source .venv/bin/activate
